@@ -3,8 +3,8 @@ import {Image} from 'react-bootstrap'
 
 
 const ImageContainer = (props) => {
-    return ( 
-        <Image src="./assets/profile.jpg" rounded fluid />  
+    return (
+        <Image src={props.imgSrc} className="img-fluid rounded-circle" />
     )
 }
 
