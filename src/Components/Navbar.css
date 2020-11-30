@@ -9,7 +9,10 @@
     color: rgb(99, 99, 99) !important;
     transition: .30s ease-in-out;
 }
-
+.nav-brand{
+    height: 35px;
+    width: 35px;
+}
 .nav-link:hover {
     color: #191919 !important;
     transition: .30s ease-in-out;

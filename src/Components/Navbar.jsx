@@ -17,7 +17,7 @@ export default class NavBar extends Component {
             <>
                 <Navbar variant="light" style={{backgroundColor:"#fff"}} className="navbar p-0" expand="lg">
                     <Container>
-                    <Navbar.Brand href="#home"><img src={logo} alt="logo" width="35" height="35"/></Navbar.Brand>
+                    <Navbar.Brand href="#home"><img src={logo} alt="logo" className="nav-brand"/></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
                     <Form inline>

@@ -5,6 +5,7 @@ export default class ProfileComponent extends Component {
     render() {
         return (
             <>
+            <Container>
                 <Row className="mt-5">
                     <Col md={8} style={{height:"500px", backgroundColor:"red"}}>
                     <ProfileContainer/>
@@ -13,6 +14,7 @@ export default class ProfileComponent extends Component {
 
                     </Col>
                 </Row>
+                </Container>
             </>
         )
     }

@@ -1,13 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-
 import './App.css';
-import {BrowserRouter as Router, Route} from "react-router-dom"
 import Footer from "./components/Footer";
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
-import './App.css';
 import NavBar from './components/Navbar';
 import {Container} from 'react-bootstrap';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
@@ -22,9 +16,7 @@ class App extends React.Component {
 
       <Router>
       <NavBar />
-      <Container>
       <ProfileComponent/>
-     </Container>
       <Route path="/" exact component={Footer} />
    </Router>
 

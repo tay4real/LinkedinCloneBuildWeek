@@ -7,6 +7,10 @@ img {
   font-size: 12px;
   font-weight: bold;
   border-top: 1px solid grey;
+ display: inline-block;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
 }
 a {
   margin-top: 4px;
