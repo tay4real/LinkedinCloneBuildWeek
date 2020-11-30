@@ -2,8 +2,51 @@
     border-radius: 50%;
     border: 3px solid #fff;
     position: absolute;
-    top:50px;
+    top:70px;
     width: 150px;
     height: 150px;
     left: 25px;
+}
+.coverImage{
+    height: 170px;
+}
+.add-profile-button{
+    background-color: #0A66C2;
+    border-radius: 20px;
+    height: 38px;
+}
+.more-button{
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid gray;
+    color: gray;
+    height: 38px;
+}
+.more-button:hover{
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid gray;
+    color: gray;
+    height: 38px;
+}
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    height: 38px;
+}
+.pencil-edit-button{
+    background-color: transparent;
+    height: 38px;
+    margin-top: -5px;
+    border: none;
+    font-size: 20px;
+    color: gray;
+}
+.pencil-edit-button:hover{
+    background-color: transparent;
+    height: 38px;
+    margin-top: -5px;
+    border: none;
+    font-size: 20px;
+    color: gray;
 }
