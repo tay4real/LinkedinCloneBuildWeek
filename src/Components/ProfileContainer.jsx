@@ -7,7 +7,7 @@ import {AiFillEye} from 'react-icons/ai';
 require('dotenv').config()
 
 export default class ProfileContainer extends Component {
-ì
+
     state={
         user: [],
     }
