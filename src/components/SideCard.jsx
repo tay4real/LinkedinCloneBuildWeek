@@ -15,8 +15,7 @@ export default class SideCard extends Component {
     render() {
         return (
          
-                <Row className="py-2 px-1">
-                    
+                <Row className="py-2 px-1 mt-3">        
                     <Col md={3} ><ImageContainer imgSrc={this.props.imgSrc} /></Col>
                     <Col md={9}>
                         <Row>
