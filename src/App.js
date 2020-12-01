@@ -17,8 +17,6 @@ class App extends React.Component {
       <Router>
         <NavBar />
         <ProfileComponent/>
-          <Route path="/" exact component={Experience} />
-          <Route path="/" exact component={Interests} />
           <Route path="/" exact component={Footer} />
       </Router>
 
