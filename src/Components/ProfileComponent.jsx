@@ -5,6 +5,7 @@ import './Profile.css'
 import ModifyProfileCard from './ModifyProfileCard';
 import AnnounceCard from './AnnounceCard';
 import Dashboard from './Dashboard';
+import Category from './Category';
 
 
 export default class ProfileComponent extends Component {
