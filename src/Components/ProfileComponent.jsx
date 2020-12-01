@@ -9,6 +9,7 @@ import Category from './Category';
 import Interests from './Interests';
 import Experience from './Experience';
 
+
 export default class ProfileComponent extends Component {
     render() {
         return (

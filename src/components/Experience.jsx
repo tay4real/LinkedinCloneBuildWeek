@@ -1,100 +1,80 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import "./Experience.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Row, Container, Col, Media, ListGroup, Button, Modal } from "react-bootstrap";
-import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa"
+import {
+  Card,
+  Row,
+  Container,
+  Col,
+  Media,
+  ListGroup,
+  Button,
+  Modal,
+} from "react-bootstrap";
+import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
 import Backoffice from "./Backoffice";
+import SingleExperience from "./SingleExperience";
 
 export default function Experience() {
   const [show, setShow] = useState(false);
-
+  const [experience, setExperience] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const getExperience = async () => {
+    let respons = await fetch(
+      `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`,
+      {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+        }),
+      }
+    );
+    let responseExperience = await respons.json();
+    // console.log(experience);
+    // if (experience === undefined) {
+    //   setExeperience(responseExperience);
+    //   console.log("This is our experience", experience);
+    // }
+
+    return responseExperience;
+  };
+
+  useEffect(() => {
+    getExperience().then((data) => {
+      setExperience(data);
+    });
+  }, []);
+
+  // console.log("This is or experience", experience);
+  console.log(experience);
   return (
     <div>
-
-    
-        <Card className="experience-container my-2">
-          <Card.Body>
-            <Col >
-              <Row className="justify-content-between">
-                <Col className="d-flex justify-content-start">
-                  <Card.Title
-                    classname="card-title-expereince d-flex justify-content-start"
-                  >
-                    Experience
+      <Card className="experience-container my-2">
+        <Card.Body>
+          <Row className="justify-content-between">
+            <Col className="d-flex justify-content-start">
+              <Card.Title classname="card-title-expereince d-flex justify-content-start">
+                Experience
               </Card.Title>
-                </Col>
-              </Row>
             </Col>
             <Col className="d-flex justify-content-end">
-              <FaPlus onClick={handleShow}/>
+              <FaPlus onClick={handleShow} />
             </Col>
-            <Media>
+          </Row>
 
-              <img
-                width={64}
-                height={64}
-                className="align-self-start mr-3"
-                src="https://via.placeholder.com/90x90"
-                alt="Generic placeholder"
-              />
-              <Media.Body  >
-                <h5 className="d-flex">Job Title</h5><span className="d-flex justify-content-end mr-3"><FaPen /></span>
-                <p className="d-flex">
-                  Company Name</p>
-                <p className="d-flex">
-                  Since (Year) - Till (Year), Location</p>
-              </Media.Body>
-            </Media>
-
-            <Media>
-              <img
-                width={64}
-                height={64}
-                className="align-self-start mr-3"
-                src="https://via.placeholder.com/90x90"
-                alt="Generic placeholder"
-              />
-              <Media.Body  >
-                <h5 className="d-flex">Job Title</h5><span className="d-flex justify-content-end mr-3"><FaPen /></span>
-                <p className="d-flex">
-                  Company Name
-      </p>
-                <p className="d-flex">
-                  Since (Year) - Till (Year), Location
-      </p>
-              </Media.Body>
-            </Media>
-
-            <Media>
-              <img
-                width={64}
-                height={64}
-                className="align-self-start mr-3"
-                src="https://via.placeholder.com/90x90"
-                alt="Generic placeholder"
-              />
-              <Media.Body  >
-                <h5 className="d-flex">Job Title</h5><span className="d-flex justify-content-end mr-3"><FaPen /></span>
-                <p className="d-flex">
-                  Company Name
-      </p>
-                <p className="d-flex">
-                  Since (Year) - Till (Year), Location
-      </p>
-              </Media.Body>
-            </Media>
-
-          </Card.Body>
-          <ListGroup.Item action className="text-center" >
-            Show more
-            <FaAngleDown />
-          </ListGroup.Item>
-        </Card>
-        <Backoffice show={show} onHide={handleClose}/>
-    
+          {experience &&
+            experience.map((element) => (
+              <SingleExperience experience={element} />
+            ))}
+        </Card.Body>
+        <ListGroup.Item action>
+          Show more
+          <FaAngleDown />
+        </ListGroup.Item>
+      </Card>
+      <Backoffice show={show} onHide={handleClose} />
     </div>
   );
 }
