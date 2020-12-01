@@ -4,10 +4,10 @@ import './Profile.css';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { FaPencilAlt } from 'react-icons/fa';
 import {AiFillEye} from 'react-icons/ai';
-require('dotenv').config()
+require('dotenv').config();
 
 export default class ProfileContainer extends Component {
-ì
+
     state={
         user: [],
     }
