@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 23px;
+    font-size: 22px;
     margin-left: 10px;
     color: rgb(99, 99, 99) !important;
     transition: .30s ease-in-out;
@@ -29,7 +29,12 @@
     height: 22px;
     border-radius: 50%;
 }
-
+.navbar{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
 .second-nav {
     border-left: 0.1px solid rgb(99, 99, 99, 0.5);
 }
