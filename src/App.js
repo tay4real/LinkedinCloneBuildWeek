@@ -13,17 +13,17 @@ class App extends React.Component {
   render(){
   return (
     <div className="App">
-
-      <Router>
+    <Router>
       <NavBar />
       <ProfileComponent/>
       <Route path="/" exact component={Footer} />
-   </Router>
+    </Router>
 
 
     </div>
   );
   }
 }
+
 
 export default App;
