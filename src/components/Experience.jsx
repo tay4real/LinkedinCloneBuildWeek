@@ -14,7 +14,7 @@ export default function Experience() {
   return (
     <div>
 
-      <Container>
+    
         <Card className="experience-container my-2">
           <Card.Body>
             <Col >
@@ -88,15 +88,13 @@ export default function Experience() {
             </Media>
 
           </Card.Body>
-          <ListGroup.Item action >
+          <ListGroup.Item action className="text-center" >
             Show more
-      <FaAngleDown />
+            <FaAngleDown />
           </ListGroup.Item>
         </Card>
         <Backoffice show={show} onHide={handleClose}/>
-      
-
-      </Container>
+    
     </div>
   );
 }
