@@ -20,6 +20,7 @@ export default class ProfileComponent extends Component {
                         <Col md={4} style={{flexDirection:"column", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"center"}} className="mt-2 ">
                            <ModifyProfileCard/>
                            <AnnounceCard/>
+                           <Category title="People you may know" />
                         </Col>
                     </Row>
                 </Container>
