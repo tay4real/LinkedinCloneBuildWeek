@@ -15,8 +15,7 @@ class App extends React.Component {
       <Router>
         <NavBar />
         <ProfileComponent/>
-      
-          <Route path="/" exact component={Footer} />
+         <Route path="/" exact component={Footer} />
       </Router>
 
     </div>
