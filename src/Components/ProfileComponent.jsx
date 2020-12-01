@@ -21,9 +21,10 @@ export default class ProfileComponent extends Component {
                             <Experience />
                             <Interests/>
                         </Col>
-                        <Col md={4} style={{flexDirection:"column", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"center"}} className="mt-2 ">
+                        <Col md={4} style={{flexDirection:"column", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"center"}}>
                            <ModifyProfileCard/>
                            <AnnounceCard/>
+                           <Category title="People also viewed" />
                            <Category title="People you may know" />
                         </Col>
                     </Row>
