@@ -1,17 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Experience.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Row, Container, Col, Media, ListGroup } from "react-bootstrap";
+import { Card, Row, Container, Col, Media, ListGroup, Button, Modal } from "react-bootstrap";
 import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa"
+import Backoffice from "./Backoffice";
 
 export default function Experience() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div>
 
       <Container>
         <Card className="experience-container my-2">
-
-
           <Card.Body>
             <Col >
               <Row className="justify-content-between">
@@ -22,11 +26,10 @@ export default function Experience() {
                     Experience
               </Card.Title>
                 </Col>
-
               </Row>
             </Col>
             <Col className="d-flex justify-content-end">
-              <FaPlus />
+              <FaPlus onClick={handleShow}/>
             </Col>
             <Media>
 
@@ -40,11 +43,9 @@ export default function Experience() {
               <Media.Body  >
                 <h5 className="d-flex">Job Title</h5><span className="d-flex justify-content-end mr-3"><FaPen /></span>
                 <p className="d-flex">
-                  Company Name
-      </p>
+                  Company Name</p>
                 <p className="d-flex">
-                  Since (Year) - Till (Year), Location
-      </p>
+                  Since (Year) - Till (Year), Location</p>
               </Media.Body>
             </Media>
 
@@ -92,6 +93,9 @@ export default function Experience() {
       <FaAngleDown />
           </ListGroup.Item>
         </Card>
+        <Backoffice show={show} onHide={handleClose}/>
+      
+
       </Container>
     </div>
   );
