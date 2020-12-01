@@ -10,8 +10,6 @@ export default function Interests() {
 
 <Container>
       <Card className="interests-container my-2">
-        
-
         <Card.Body>
         <Col >
           <Row className="justify-content-between">
