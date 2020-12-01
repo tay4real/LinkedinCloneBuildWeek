@@ -6,7 +6,9 @@ import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
 
 export default function Interests() {
   return (
-
+    <Card className="interests-container my-2">
+      <Card.Body>
+        <Col>
           <Row className="justify-content-between">
             <Col className="d-flex justify-content-start">
               <Card.Title classname="card-title-expereince d-flex justify-content-start">
@@ -122,6 +124,10 @@ export default function Interests() {
           </Col>
         </Row>
       </Card.Body>
-
+      <ListGroup.Item action>
+        See all
+        <FaAngleDown />
+      </ListGroup.Item>
+    </Card>
   );
 }
