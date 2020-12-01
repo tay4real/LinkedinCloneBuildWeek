@@ -8,7 +8,6 @@ export default function Interests() {
   return (
     <div>
 
-<Container>
       <Card className="interests-container my-2">
         <Card.Body>
         <Col >
@@ -146,12 +145,12 @@ export default function Interests() {
 
 
       </Card.Body>
-      <ListGroup.Item action >
-      See all
+      <ListGroup.Item action  className="text-center">
+        See all
       <FaAngleDown/>
     </ListGroup.Item>
       </Card>
-      </Container>
+   
     </div>
   );
 }
