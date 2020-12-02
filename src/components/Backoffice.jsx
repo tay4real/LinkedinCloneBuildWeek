@@ -21,10 +21,7 @@ export default class Backoffice extends Component {
         this.setState({experience})
     }
 
-    componentDidMount(){
-        this.getUserExperience()
-    }
-   
+
     handleSubmit=async(e)=>{
         e.preventDefault();
     try{
