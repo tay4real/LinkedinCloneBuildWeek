@@ -2,19 +2,22 @@ import React, { Component } from 'react'
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap'
 import './CreatePostComponent.css';
 import { BiWorld } from 'react-icons/bi';
+
 export default class NewPostModal extends Component {
     state={
         post:{
         text:"",
-    }
+    },
+    mypost: "",
+    id: "",
 }
-
     updatePostField = (e) => {
         let post = { ...this.state.post} 
         let currentId = e.currentTarget.id 
         post[currentId] = e.currentTarget.value 
         this.setState({post})
     }
+   
 
     submitPost = async (e) => {
         e.preventDefault();
@@ -66,12 +69,12 @@ export default class NewPostModal extends Component {
                             </Col>
                         </Row>
                         <Form onSubmit={this.submitPost}>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Group >
                                 <Form.Control as="textarea" 
                                 placeholder="What do you want to talk about?"
                                 className="textAreaPost"
                                 id="text"
-                                value={this.state.post.text}
+                                value={this.props.id ? this.props.id : this.state.post.text}
                                 onChange={this.updatePostField}
                                 rows={3} />
                             </Form.Group>
@@ -83,4 +86,3 @@ export default class NewPostModal extends Component {
         )
     }
 }
-

@@ -8,8 +8,8 @@ export default class Home extends Component {
     state={
         posts:[],
     }
-    getPost = async (e) => {
-        try {
+    getPost = async () => {
+        console.log("ciao");
             let response = await fetch('https://striveschool-api.herokuapp.com/api/posts/',
                 {
                     method: 'GET',
@@ -17,24 +17,23 @@ export default class Home extends Component {
                         "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
                     })
                 })
-            if (response.ok) {
+                console.log("sono nel component did mount")
                 let posts= await response.json();
-                this.setState({posts})
-            } else {
-                console.log('an error occurred')
-                let error = await response.json()
-            }
-        } catch (e) {
-            console.log(e) 
-        }
+                let postsArray= posts.reverse();
+                this.setState({posts: postsArray})
+                console.log("sono nel getPost");
     }
+
     componentDidMount(){
-        this.getPost()
+      this.getPost()
     }
     componentDidUpdate(prevProp, prevState){
-        if(prevState !== this.state.posts){
-           this.getPost()
-
+        if(prevState.posts !== this.state.posts.length){
+            console.log("hiiii")
+            console.log(prevState)
+            console.log(this.state.posts);
+            //this.getPost();
+          
         }else{
             console.log("nothing changed");
         }
