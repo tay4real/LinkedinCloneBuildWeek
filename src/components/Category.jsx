@@ -7,65 +7,29 @@ import {FaAngleDown, FaAngleUp } from "react-icons/fa"
 export default class Category extends Component {
 
     state={
-        all_users: [],
+        all_users_profile: this.props.usersProfile,
         display_users: [],
-        show_count: 5,
         showMore: false
     }
   
-    getUsersProfile = async()=>{
-        try{
-            let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/",{
-                "method": "GET", 
-                "headers": new Headers({
-                    "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
-                })
-            })
-            if(response.ok){
-                let users = await response.json();
-                console.log(users)
-                this.setState({users})
-                this.showUsers()
-            }else{
-                <Alert >Opps, an error occured: </Alert>
-            }
-        }catch(e){
-            <Alert >Opps, an error occured:</Alert>
-        }  
-    }
-
-    
-
+   
     componentDidMount(){
-        console.log('Users has finished mounting')
-        this.getUsersProfile()
-
+        this.setState({all_users_profile : this.props.usersProfile})
+        this.showLessUsers()
     }
-
-    componentDidUpdate() {
-        if (this.state.showMore) {
-            console.log('just entered componentDidUpdate')
-            this.showUsers()
-            this.setState({showMore: false})    
-        }else{
-
-        }
-      }
-
-    showUsers = () => {
-        this.state.users.length !== 0 && this.setState({display_users: this.state.users.slice(0,this.state.show_count)})
-        console.log(this.state.show_count)
+    
+    
+    showLessUsers = () => {
+       !this.state.showMore && this.setState({display_users: this.state.all_users_profile.slice(0,5), showMore: true })
     }
 
     showMoreUsers = () => {
-        this.setState(prevState => ({
-            show_count: prevState.show_count === 5 ? prevState.show_count + 5 : prevState.show_count,  showMore: !prevState.showMore
-            }))
+        this.state.showMore && this.setState({display_users: this.state.all_users_profile.slice(0,10), showMore: false })
     }
 
-
+    
     render() {
-        console.log(this.state.users)
+        console.log(this.state.all_users_profile)
         return (
             <Card className="mt-4" style={{ width: '20rem', borderRadius:"12px"}} >
                 <Card.Title className="text-left m-0 p-0 pt-4 px-3"> <h2 style={{fontSize:"1em"}}>{this.props.title}</h2></Card.Title>
@@ -75,8 +39,8 @@ export default class Category extends Component {
                     }
                 </Card.Body>
                
-                <ListGroup.Item action className="text-center" onClick ={this.showMoreUsers}>
-                   {!this.state.showMore ? (<>Show more <FaAngleDown /></>) : (<>Show less <FaAngleUp /></>) } 
+                <ListGroup.Item action className="text-center" onClick ={this.state.showMore ? this.showMoreUsers: this.showLessUsers}>
+                   {this.state.showMore ? (<>Show more <FaAngleDown /></>) : (<>Show less <FaAngleUp /></>) } 
                 </ListGroup.Item>
             </Card>
         )
