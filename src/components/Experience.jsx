@@ -32,11 +32,6 @@ export default function Experience() {
       }
     );
     let responseExperience = await respons.json();
-    // console.log(experience);
-    // if (experience === undefined) {
-    //   setExeperience(responseExperience);
-    //   console.log("This is our experience", experience);
-    // }
 
     return responseExperience;
   };
@@ -47,7 +42,6 @@ export default function Experience() {
     });
   }, []);
 
-  // console.log("This is or experience", experience);
   console.log(experience);
   return (
     <div>
@@ -74,7 +68,7 @@ export default function Experience() {
           <FaAngleDown />
         </ListGroup.Item>
       </Card>
-      <Backoffice show={show} onHide={handleClose} />
+      <Backoffice show={show} onHide={handleClose} getExperience={getExperience}/>
     </div>
   );
 }
