@@ -20,7 +20,6 @@ export default class Home extends Component {
             if (response.ok) {
                 let posts= await response.json();
                 this.setState({posts})
-                console.log(posts);
             } else {
                 console.log('an error occurred')
                 let error = await response.json()
@@ -32,6 +31,14 @@ export default class Home extends Component {
     componentDidMount(){
         this.getPost()
     }
+    componentDidUpdate(prevProp, prevState){
+        if(prevState !== this.state.posts){
+           this.getPost()
+
+        }else{
+            console.log("nothing changed");
+        }
+    }
     render() {
         return (
             <>
@@ -41,7 +48,7 @@ export default class Home extends Component {
                 <ProfileDetailsCard/>
             </Col>
             <Col md={6} >
-            <CreatePostComponent />
+            <CreatePostComponent fetch={this.getPost}/>
             {this.state.posts && 
             this.state.posts.map((element) => (
             <SinglePost post={element}/>
@@ -51,7 +58,6 @@ export default class Home extends Component {
             <AnnounceCard/>
             <AnnounceCard/>
             <AnnounceCard/>
-
             </Col>
                  </Row>
              </Container>

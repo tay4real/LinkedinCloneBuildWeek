@@ -9,7 +9,6 @@ export default class NewPostModal extends Component {
     }
 }
 
-
     updatePostField = (e) => {
         let post = { ...this.state.post} 
         let currentId = e.currentTarget.id 
@@ -76,14 +75,9 @@ export default class NewPostModal extends Component {
                                 onChange={this.updatePostField}
                                 rows={3} />
                             </Form.Group>
-                            <Button type="submit">Post</Button>
+                            <Button type="submit" className="post-modal-button justify-content-right d-flex ml-auto ">Post</Button>
                         </Form>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.onHide}>
-                            Close
-                    </Button>
-                    </Modal.Footer>
                 </Modal>
             </div>
         )

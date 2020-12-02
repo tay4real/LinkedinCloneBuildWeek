@@ -56,7 +56,7 @@ export default class CreatePostComponent extends Component {
                     </Col>
                     </Row>
                 </Card>
-                <NewPostModal show={this.state.show} onHide={this.handleClose} />
+                <NewPostModal show={this.state.show} fetch={this.props.fetch} onHide={this.handleClose} />
                
             </div>
         )
