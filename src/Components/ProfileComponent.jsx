@@ -5,9 +5,9 @@ import './Profile.css'
 import ModifyProfileCard from './ModifyProfileCard';
 import AnnounceCard from './AnnounceCard';
 import Dashboard from './Dashboard';
-import Category from './Category'
-import Interests from "./Interests"
-import Experience from "./Experience"
+import Category from './Category';
+import Interests from './Interests';
+import Experience from './Experience';
 
 
 export default class ProfileComponent extends Component {
@@ -20,11 +20,11 @@ export default class ProfileComponent extends Component {
                             <ProfileContainer />
                             <Dashboard />
                             <Experience />
-                            <Interests />
+                            <Interests/>
                         </Col>
                         <Col md={4} style={{flexDirection:"column", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"center"}} className="mt-2 ">
                            <ModifyProfileCard/>
-                           <AnnounceCard/>
+                           <AnnounceCard />
                            <Category title="People you may know" />
                         </Col>
                     </Row>

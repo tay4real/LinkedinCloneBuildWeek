@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import NavBar from './components/Navbar';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import ProfileComponent from './components/ProfileComponent';
-
+import Home from './components/Home'
 
 class App extends React.Component {
 
@@ -14,14 +14,27 @@ class App extends React.Component {
     <div className="App">
       <Router>
         <NavBar />
-        <ProfileComponent/>
-      
-          <Route path="/" exact component={Footer} />
+        <Route
+        path="/"
+        exact
+        render={(
+        props 
+        ) => <Home  {...props} />} 
+        />
+        <Route
+        path="/profile"
+        exact
+        render={(
+        props 
+        ) => <ProfileComponent  {...props} />} 
+        />
+        
       </Router>
 
     </div>
   );
   }
 }
+
 
 export default App;
