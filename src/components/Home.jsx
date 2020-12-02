@@ -52,9 +52,7 @@ export default class Home extends Component {
             <AnnounceCard/>
             <AnnounceCard/>
 
-
             </Col>
-
                  </Row>
              </Container>
             </>

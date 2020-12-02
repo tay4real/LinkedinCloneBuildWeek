@@ -8,8 +8,20 @@
 .small-text-profile-detail p{
     margin: 0;
     padding: 0;
-    font-size: 15px;
+    font-size: 13px;
 }
 .little-blue-numbers-detail{
     color: #0B65C3;
+}
+.card-footer-text{
+    font-size:14px;
+    background-color: white;
+}
+.profile-detail-card{
+    padding: 0;
+    border-radius: 16px;
+}
+.profile-detail-image{
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }

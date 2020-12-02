@@ -21,20 +21,10 @@ export default class ProfileContainer extends Component {
         let user = await response.json();
         this.setState({user});
     }
-    getUsersProfile=async()=>{
-        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/",{
-            "method": "GET", 
-            "headers": new Headers({
-                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
-            })
-        })
-        let users = await response.json();
-        console.log(users)
-    }
+
 
     componentDidMount(){
         this.getUserProfile();
-        this.getUsersProfile()
     }
     render() {
         return (
