@@ -8,7 +8,7 @@ function Footer() {
 
     <>
 
-      <footer>
+      <footer >
         <Container className="containers mt-5 justify-content-center align-items-center text-center">
           <img src="/LI-Logo.png" className="mt-4 d-flex " />
           <Row className="mt-4 flex-column text-left">
@@ -20,7 +20,7 @@ function Footer() {
                   <Dropdown>
                     <Dropdown.Toggle id="privacy" className="p-0 m-0">
                       Privacy & Terms
-  </Dropdown.Toggle>
+                  </Dropdown.Toggle>
                     <Dropdown.Menu id="privacyItems">
                       <Dropdown.Item href="/">Privacy policy</Dropdown.Item>
                       <Dropdown.Item href="/">User Agreement</Dropdown.Item>
