@@ -47,16 +47,16 @@ class Experience extends Component {
     }catch(e){
 
     }
-    
-    
   };
 
   componentDidMount(){
     this.getExperience();
   }
 
-  componentDidUpdate(){
-    
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.experience !== this.state.experience) {
+      this.getExperience();
+    }
   }
 
   render(){
@@ -86,7 +86,7 @@ class Experience extends Component {
             <FaAngleDown />
           </ListGroup.Item>
         </Card>
-        <Backoffice show={this.show} onHide={this.handleClose} />
+        <Backoffice show={this.state.show} onHide={this.handleClose} />
       </div>
     );
   }

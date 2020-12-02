@@ -31,7 +31,7 @@ export default class Backoffice extends Component {
            }),
            body: JSON.stringify(this.state.experience),
         })
-    alert("experience added");
+    alert("Experience Added");
     }catch(e){
         console.log(e);
     }
