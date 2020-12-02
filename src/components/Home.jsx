@@ -3,6 +3,7 @@ import {Container, Row, Col, Card, Button} from 'react-bootstrap';
 import CreatePostComponent from './CreatePostComponent';
 import SinglePost from './SinglePost';
 import AnnounceCard from './AnnounceCard';
+import ProfileDetailsCard from './ProfileDetailsCard';
 export default class Home extends Component {
     state={
         posts:[],
@@ -37,6 +38,7 @@ export default class Home extends Component {
              <Container className="mx-auto justify-content-center  text-center d-block mb-5">
                  <Row className="mx-auto mt-5 justify-content-center text-center ">
             <Col md={3} >
+                <ProfileDetailsCard/>
             </Col>
             <Col md={6} >
             <CreatePostComponent />

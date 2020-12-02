@@ -11,10 +11,10 @@ export default class SinglePost extends Component {
     render() {
         return (
             <div>
-                <Card className="d-block mt-5 postCard">
+                <Card className="d-block mt-3 postCard">
                     <Card.Body className="px-0">
                         <Row >
-                            <Col md={2} className="p-0 m-0">
+                            <Col md={2} className="p-0 m-0 ml-2">
                                 <img src="http://placehold.it/20x20" className="postProfilePic"/>
                             </Col>
                             <Col md={9} className="p-0 m-0 d-flex align-items-center justify-content-between"><p className="text-left p-0 m-0">{this.props.post.username}</p><BiDotsHorizontalRounded className="dot-icon"/></Col>
