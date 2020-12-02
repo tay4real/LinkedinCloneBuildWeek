@@ -9,7 +9,7 @@ require('dotenv').config();
 export default class ProfileContainer extends Component {
 
     state={
-        user: [],
+        user: "",
     }
     getUserProfile=async()=>{
         let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
