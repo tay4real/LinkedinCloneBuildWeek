@@ -1,0 +1,84 @@
+.profile-image{
+    border-radius: 50%;
+    border: 3px solid #fff;
+    position: absolute;
+    top:70px;
+    width: 150px;
+    height: 150px;
+    left: 25px;
+}
+.coverImage{
+    height: 170px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+.add-profile-button{
+    background-color: #0A66C2;
+    border-radius: 20px;
+    height: 38px;
+}
+.more-button{
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid gray;
+    color: gray;
+    height: 38px;
+}
+.more-button:hover{
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid gray;
+    color: gray;
+    height: 38px;
+}
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    height: 38px;
+}
+.pencil-edit-button{
+    background-color: transparent;
+    height: 38px;
+    margin-top: -5px;
+    border: none;
+    font-size: 20px;
+    color: gray;
+}
+.pencil-edit-button:hover{
+    background-color: transparent;
+    height: 38px;
+    margin-top: -5px;
+    border: none;
+    font-size: 20px;
+    color: gray;
+}
+.card-user-profile{
+    border-radius: 15px;
+}
+.image-announce{
+    width: 60px;
+    height: 60px;
+}
+.request-announce-button{
+    background-color: transparent;
+    border: 1px solid #0A66C2;
+    color: #0A66C2;
+    border-radius: 20px;
+    margin-top:10px;
+}
+.request-announce-button:hover{
+    background-color: transparent;
+    border: 1px solid #0A66C2;
+    color: #0A66C2;
+    border-radius: 20px;
+    margin-top:10px;
+}
+@media(max-width: 900px){
+    .buttons{
+        display: flex;
+        justify-content: center;
+        height: 38px;
+        margin-top:35px;
+    }
+
+}
