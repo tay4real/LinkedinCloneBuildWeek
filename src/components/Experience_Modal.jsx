@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
 require('dotenv').config()
 
-export default class Backoffice extends Component {
+export default class Experience_Modal extends Component {
     state = {
         experience:{
         role: "",

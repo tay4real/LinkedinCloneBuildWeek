@@ -1,5 +1,5 @@
 import React from "react";
-import "./Interests.css";
+import "../styles/Interests.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Row, Container, Col, Media, ListGroup } from "react-bootstrap";
 import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";

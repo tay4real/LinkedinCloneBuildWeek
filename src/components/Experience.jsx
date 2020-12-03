@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import "./Experience.css";
+import "../styles/Experience.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Card,
@@ -12,7 +12,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
-import Backoffice from "./Backoffice";
+import Experience_Modal from "./Experience_Modal";
 import SingleExperience from "./SingleExperience";
 
 class Experience extends Component {
@@ -86,7 +86,7 @@ class Experience extends Component {
             <FaAngleDown />
           </ListGroup.Item>
         </Card>
-        <Backoffice  show={this.state.show} onHide={this.handleClose} />
+        <Experience_Modal  show={this.state.show} onHide={this.handleClose} />
       </div>
     );
   }
