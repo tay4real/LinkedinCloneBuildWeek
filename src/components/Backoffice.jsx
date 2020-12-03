@@ -38,7 +38,6 @@ export default class Backoffice extends Component {
     }
     }
     render() {
-        console.log(process.env.REACT_APP_USER_ID);
 
         return (
             <div>

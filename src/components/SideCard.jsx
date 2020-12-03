@@ -8,10 +8,6 @@ import Title from './Title'
 
 export default class SideCard extends Component {
 
-    state = {
-
-    }
-
     render() {
         return (        
                 <Row className="py-2 px-1 mt-3">        

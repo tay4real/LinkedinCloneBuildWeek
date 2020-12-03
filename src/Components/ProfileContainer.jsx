@@ -33,8 +33,6 @@ export default class ProfileContainer extends Component {
     HandleFile = (e) => {
         const formData = new FormData();
         formData.append("profile", e.target.files[0]);
-        console.log(process.env.REACT_APP_API_TOKEN)
-        console.log(formData);
         this.setState({ profile: formData });
         this.setState({display: true})
     };
@@ -51,8 +49,6 @@ export default class ProfileContainer extends Component {
                 }
             );
             if (response.ok) {
-                console.log("OK");
-                console.log("ueueue", this.state.profile)
                 this.getUserProfile()
                 this.setState({display:false})
             } else {

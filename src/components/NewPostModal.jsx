@@ -22,8 +22,6 @@ export default class NewPostModal extends Component {
     HandleFile = (e) => {
         const formData = new FormData();
         formData.append("post", e.target.files[0]);
-        console.log(process.env.REACT_APP_API_TOKEN)
-        console.log(formData);
         this.setState({ post: formData });
     };
     PostImage = async (id) => {
@@ -40,11 +38,9 @@ export default class NewPostModal extends Component {
             );
             if (response.ok) {
                 console.log("OK");
-                console.log(id)
             } else {
                 const error = await response.json();
                 console.log(error);
-                console.log("im error but here is id", id);
             }
         } catch (error) {
             console.log(error);
@@ -70,11 +66,9 @@ export default class NewPostModal extends Component {
                 this.setState({
                     wholePost: { text: "" },
                 });
-                console.log(data)
                 this.PostImage(data._id);
                 this.props.fetch()
             } else {
-                console.log(this.state.wholePost.text);
                 let error = await response.json();
                 console.log(error);
             }

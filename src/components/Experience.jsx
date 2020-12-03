@@ -42,7 +42,6 @@ export default function Experience() {
     });
   }, []);
 
-  console.log(experience);
   return (
     <div>
       <Card className="experience-container my-2">

@@ -9,7 +9,6 @@ export default class SingeExperience extends Component {
   };
 
   render() {
-    console.log(this.props.experience);
     return (
       <Media className="mt-2">
         <img
