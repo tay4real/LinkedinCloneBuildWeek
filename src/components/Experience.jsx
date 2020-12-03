@@ -81,12 +81,12 @@ class Experience extends Component {
                 <SingleExperience experience={element} />
               ))}
           </Card.Body>
-          <ListGroup.Item action>
+          <ListGroup.Item action className="text-center ">
             Show more
             <FaAngleDown />
           </ListGroup.Item>
         </Card>
-        <Backoffice show={this.state.show} onHide={this.handleClose} />
+        <Backoffice  show={this.state.show} onHide={this.handleClose} />
       </div>
     );
   }
