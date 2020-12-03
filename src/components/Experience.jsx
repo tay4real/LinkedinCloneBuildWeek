@@ -1,36 +1,31 @@
 import React, { Component} from "react";
 import "../styles/Experience.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Card,
-  Row,
-  Container,
-  Col,
-  Media,
-  ListGroup,
-  Button,
-  Modal,
-} from "react-bootstrap";
-import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
-import Experience_Modal from "./Experience_Modal";
+import {Card, Row,Col,ListGroup} from "react-bootstrap";
+import { FaPlus,FaAngleDown } from "react-icons/fa";
+import ExperienceModal from "./ExperienceModal";
 import SingleExperience from "./SingleExperience";
 
 class Experience extends Component {
 
   state = {
-    show: false,
+    add: false,
+    edit: false,
     experience: [],
   }
 
   
 
-  handleClose = () => this.setState({show: false});
-  handleShow = () => this.setState({show: true});
+  handleAddClose = () => this.setState({add: false});
+  handleAddOpen = () => this.setState({add: true});
+  handleEditClose = () => this.setState({edit: false});
+  handleEditOpen = () => this.setState({edit: true});
 
+  url = `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`
   getExperience = async () => {
     try{
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`,
+        this.url,
         {
           method: "GET",
           headers: new Headers({
@@ -41,11 +36,11 @@ class Experience extends Component {
       if(response.ok){
         let responseExperience = await response.json();
         this.setState({experience: responseExperience})
-        console.log(responseExperience)
+  
       }
       
     }catch(e){
-
+        
     }
   };
 
@@ -60,7 +55,7 @@ class Experience extends Component {
   }
 
   render(){
-    console.log(this.state.experience);
+    console.log(this.state.experience)
     return (
       <div>
         <Card className="experience-container my-2">
@@ -72,13 +67,13 @@ class Experience extends Component {
                 </Card.Title>
               </Col>
               <Col className="d-flex justify-content-end">
-                <FaPlus onClick={this.handleShow} />
+                <FaPlus onClick={this.handleAddOpen} />
               </Col>
             </Row>
   
             {this.state.experience &&
               this.state.experience.map((element) => (
-                <SingleExperience experience={element} />
+                <SingleExperience key={element.id} experience={element} onClick={this.handleEditOpen}/>
               ))}
           </Card.Body>
           <ListGroup.Item action className="text-center ">
@@ -86,7 +81,8 @@ class Experience extends Component {
             <FaAngleDown />
           </ListGroup.Item>
         </Card>
-        <Experience_Modal  show={this.state.show} onHide={this.handleClose} />
+        {this.state.add && <ExperienceModal show={this.state.add} add={this.state.add} onHide={this.handleAddClose} />}
+        {this.state.edit && <ExperienceModal show={this.state.edit} edit={this.state.edit} onHide={this.handleEditClose} />}
       </div>
     );
   }

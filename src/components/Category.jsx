@@ -29,7 +29,7 @@ export default class Category extends Component {
 
     
     render() {
-        console.log(this.state.all_users_profile)
+       
         return (
             <Card className="mt-4" style={{ width: '20rem', borderRadius:"12px"}} >
                 <Card.Title className="text-left m-0 p-0 pt-4 px-3"> <h2 style={{fontSize:"1em"}}>{this.props.title}</h2></Card.Title>

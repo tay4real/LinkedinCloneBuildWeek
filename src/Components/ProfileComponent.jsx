@@ -25,7 +25,7 @@ export default class ProfileComponent extends Component {
             })
         })
         let userProfile = await response.json();
-        console.log(userProfile)
+        
         this.setState({userProfile});
     }
 
@@ -38,7 +38,7 @@ export default class ProfileComponent extends Component {
         })
         if(response.ok){
             let allUsersProfile = await response.json();
-            console.log(allUsersProfile)
+            
             this.setState({allUsersProfile});
         }else{
             <Alert >Opps, an error occured: </Alert>
@@ -60,7 +60,7 @@ export default class ProfileComponent extends Component {
     }
 
     render() {
-        console.log(this.state.userProfile)
+     
         return (
             <>
                 <Container>
