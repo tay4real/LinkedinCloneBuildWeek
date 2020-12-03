@@ -26,9 +26,9 @@ export default class ProfileComponent extends Component {
 
   getUserProfile = async () => {
     let response = await fetch(
-      "https://striveschool-api.herokuapp.com/api/profile/",
-      //   + { _id }
-      // this.state.userProfile._id,
+      "https://striveschool-api.herokuapp.com/api/profile/" +
+        this.props.match.params.userId,
+
       {
         method: "GET",
         headers: new Headers({
@@ -61,11 +61,17 @@ export default class ProfileComponent extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.match.params.userId);
     this.getUserProfile();
     this.getUsersProfile();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      this.getUserProfile();
+      this.getUsersProfile();
+    }
+
     if (this.state.showMore) {
       console.log("just entered componentDidUpdate");
       this.showUsers();

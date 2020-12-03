@@ -4,6 +4,7 @@ import "./Profile.css";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiFillEye } from "react-icons/ai";
+
 require("dotenv").config();
 
 export default class ProfileContainer extends Component {
@@ -16,10 +17,7 @@ export default class ProfileContainer extends Component {
           className="coverImage image-fluid"
         />
         <Card.Body>
-          <img
-            src="https://media-exp1.licdn.com/dms/image/C4D03AQFQbLFj5Hs2kw/profile-displayphoto-shrink_400_400/0?e=1612396800&v=beta&t=ZqwAjRdb3l6vw76BXdUMU2UT5D-bPni7LqbahbQVVc0"
-            className="profile-image"
-          />
+          <img src={this.props.userProfile.image} className="profile-image" />
           <div className="buttons">
             <Button className="add-profile-button mr-2">
               Add profile section{" "}
@@ -42,6 +40,9 @@ export default class ProfileContainer extends Component {
           </Card.Text>
           <Card.Text className=" text-left text-black d-flex">
             <p className="p-0 m-0">{this.props.userProfile.area} • </p>
+            <p className="p-0 m-0" type="email">
+              {this.props.userProfile.email} •{" "}
+            </p>
             <a className="p-0 m-0 ml-2">500+ connections</a>
             <p className="p-0 m-0 ml-2"> • </p>
             <a className="p-0 m-0 ml-2">More info</a>
