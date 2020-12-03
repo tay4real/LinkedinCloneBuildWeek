@@ -5,7 +5,7 @@ import { Card, Row, Col, ListGroup } from "react-bootstrap";
 import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
 import Backoffice from "./Backoffice";
 import SingleExperience from "./SingleExperience";
-
+import { withRouter } from "react-router-dom";
 class Experience extends Component {
   state = {
     show: false,
@@ -18,7 +18,7 @@ class Experience extends Component {
   getExperience = async () => {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.match.params.userId}/experiences/`,
         {
           method: "GET",
           headers: new Headers({
@@ -77,4 +77,4 @@ class Experience extends Component {
   }
 }
 
-export default Experience;
+export default withRouter(Experience);

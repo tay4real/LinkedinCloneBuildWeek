@@ -15,7 +15,7 @@ import AnnounceCard from "./AnnounceCard";
 import Dashboard from "./Dashboard";
 import Category from "./Category";
 import Interests from "./Interests";
-import Experience from "./Experience";
+import CurrentUserExperience from "./CurrentUserExperience";
 import Loader from "./Loader";
 
 export default class ProfileComponent extends Component {
@@ -94,7 +94,7 @@ export default class ProfileComponent extends Component {
                 <Loader />
               )}
               <Dashboard />
-              <Experience />
+              <CurrentUserExperience />
               <Interests />
             </Col>
             <Col
