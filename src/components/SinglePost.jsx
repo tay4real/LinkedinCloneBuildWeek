@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Container, Row, Col, Button, Spinner,Modal,Form } from 'react-bootstrap';
+import { Card, Container, Row, Col, Button, Spinner, Modal, Form, DropdownButton, Dropdown } from 'react-bootstrap';
 import './SinglePost.css';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlineLike } from 'react-icons/ai';
@@ -7,14 +7,17 @@ import { RiMessageLine } from 'react-icons/ri';
 import { IoMdShareAlt } from 'react-icons/io';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { BsPencilSquare } from 'react-icons/bs';
+import {BsTrashFill} from 'react-icons/bs';
+import {BsBookmarkFill, BsFillEyeFill} from 'react-icons/bs';
+
 import NewPostModal from './NewPostModal';
 export default class SinglePost extends Component {
     state = {
         open: true,
         show: false,
         id: "",
-        post:{
-            text:"",
+        post: {
+            text: "",
         }
     }
 
@@ -23,8 +26,8 @@ export default class SinglePost extends Component {
     }
     handleShow = (id) => {
         this.setState({ show: true });
-        if(id){
-            this.setState({post:{text: id}})
+        if (id) {
+            this.setState({ post: { text: id } })
         }
     }
 
@@ -41,7 +44,7 @@ export default class SinglePost extends Component {
         }
 
     }
-    handleUpdate= async(id)=>{
+    handleUpdate = async (id) => {
         try {
             let response = await fetch(
                 `https://striveschool-api.herokuapp.com/api/posts/${id}`,
@@ -60,6 +63,8 @@ export default class SinglePost extends Component {
                     post: { text: "" },
                 });
                 this.props.fetch()
+                this.setState({ show: false });
+
             } else {
                 let error = await response.json();
                 console.log(error);
@@ -71,7 +76,7 @@ export default class SinglePost extends Component {
 
 
     updatePostField = (e) => {
-        this.setState({  post: { text: e.target.value } });
+        this.setState({ post: { text: e.target.value } });
     };
 
 
@@ -87,7 +92,18 @@ export default class SinglePost extends Component {
                             <Col md={9} className="p-0 m-0 d-flex align-items-center justify-content-between">
                                 <p className="text-left p-0 m-0">{this.props.post.username}</p>
                                 {this.props.post.username === process.env.REACT_APP_USER_NAME ?
-                                    <BsPencilSquare onClick={() => this.handleShow(this.props.post.text)} /> : <BiDotsHorizontalRounded className="dot-icon" />
+                                 <DropdownButton
+                                 style={{backgroundColor:"#ffff"}}
+                                 className="dropdown-post"
+                                 id="dropdown-post"
+                                 >
+                                 <Dropdown.Item eventKey="1"  onClick={() => this.handleShow(this.props.post.text)}><BsPencilSquare className="mr-2"/>Edit this post</Dropdown.Item>
+                                 <Dropdown.Item eventKey="2" onClick={() => this.handleDelete(this.props.post._id)}><BsTrashFill className="mr-2" />Delete this post</Dropdown.Item>
+                                 <Dropdown.Item eventKey="3"><BsBookmarkFill className="mr-2"/>Save this post</Dropdown.Item>
+                                 <Dropdown.Divider />
+                                 <Dropdown.Item eventKey="4"><BsFillEyeFill className="mr-2"/>Who can see this?</Dropdown.Item>
+                             </DropdownButton>
+                                     : <BiDotsHorizontalRounded className="dot-icon" />
                                 }</Col>
                         </Row>
                         <Card.Text className="text-left mt-3 px-1">
@@ -115,25 +131,25 @@ export default class SinglePost extends Component {
                         <Modal.Header closeButton>
                             <Modal.Title>Modal heading</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>{this.props.post._id}
-                        <Form>
-                            <Form.Group>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={3}
-                                    placeholder="what do you want to talk about?"
-                                    style={{ border: "none" }}
-                                    value={this.state.post.text}
-                                    id="text"
-                                    onChange={(e) => this.updatePostField(e)}
-                                />
-                            </Form.Group>
-                        </Form></Modal.Body>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group>
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={3}
+                                        placeholder="what do you want to talk about?"
+                                        style={{ border: "none" }}
+                                        value={this.state.post.text}
+                                        id="text"
+                                        onChange={(e) => this.updatePostField(e)}
+                                    />
+                                </Form.Group>
+                            </Form></Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.handleClose}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={()=>this.handleUpdate(this.props.post._id)}>
+                            <Button variant="primary" onClick={() => this.handleUpdate(this.props.post._id)}>
                                 Save Changes
                             </Button>
                         </Modal.Footer>
@@ -143,3 +159,6 @@ export default class SinglePost extends Component {
         )
     }
 }
+
+
+/*<BsPencilSquare onClick={() => this.handleShow(this.props.post.text)} /> */

@@ -18,7 +18,7 @@ export default class Home extends Component {
                     })
                 })
                 let posts= await response.json();
-                let postsArray= posts.reverse();
+                let postsArray= posts.reverse().splice(0,30);
                 this.setState({posts: postsArray})
     }
 

@@ -10,3 +10,21 @@
 .postCard{
 border-radius: 16px;
 }
+
+.dropdown-post{
+    background-color: transparent!important;
+    border:none;
+    color: grey!important;
+}
+#dropdown-post{
+    background-color: transparent!important;
+    border:none;
+    color: grey!important;
+}
+#dropdown-post:focus{
+    outline: 0!important;
+    background-color: transparent!important;
+    box-shadow: none!important;
+    border:none;
+    color: grey!important;
+}

@@ -68,6 +68,7 @@ export default class NewPostModal extends Component {
                 });
                 this.PostImage(data._id);
                 this.props.fetch()
+                this.props.onHide()
             } else {
                 let error = await response.json();
                 console.log(error);
