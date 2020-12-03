@@ -44,7 +44,7 @@ export default class SinglePost extends Component {
                     <Card.Body className="px-0">
                         <Row >
                             <Col md={2} className="p-0 m-0 ml-2">
-                                <img src="http://placehold.it/20x20" className="postProfilePic" />
+                                <img src={this.props.post.user.image} className="postProfilePic" />
                             </Col>
                             <Col md={9} className="p-0 m-0 d-flex align-items-center justify-content-between">
                                 <p className="text-left p-0 m-0">{this.props.post.username}</p>
