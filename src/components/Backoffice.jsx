@@ -11,7 +11,8 @@ export default class Backoffice extends Component {
         endDate: "", //could be null
         description: "",
         area: "",
-        }
+        },
+        user_experience : []
     }
     updateField = (e) => {
         let experience = { ...this.state.experience } 
@@ -19,6 +20,7 @@ export default class Backoffice extends Component {
         experience[currentId] = e.currentTarget.value 
         this.setState({experience})
     }
+
 
     handleSubmit=async(e)=>{
         e.preventDefault();
@@ -31,19 +33,20 @@ export default class Backoffice extends Component {
            }),
            body: JSON.stringify(this.state.experience),
         })
-    alert("experience added");
+    alert("Experience Added");
     }catch(e){
         console.log(e);
     }
     }
     render() {
         console.log(process.env.REACT_APP_USER_ID);
+        
 
         return (
             <div>
                 <Modal show={this.props.show} onHide={this.props.onHide}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add a new experience!</Modal.Title>
+                        <Modal.Title>Add experience</Modal.Title>
                     </Modal.Header>
                     <Form onSubmit={this.handleSubmit}  className="py-2 px-4">
                         <Form.Group>
@@ -79,7 +82,7 @@ export default class Backoffice extends Component {
                                     placeholder="Date and Time"
                                     value={this.state.experience.startDate}
                                     onChange={this.updateField}
-                                    required
+                                    
                                 />
                             </Form.Group>
                             <Form.Group>
@@ -91,7 +94,7 @@ export default class Backoffice extends Component {
                                     placeholder="Date and Time"
                                     value={this.state.experience.endDate}
                                     onChange={this.updateField}
-                                    required
+                                    
                                 />
                             </Form.Group>
                         <Button variant="primary" type="submit">

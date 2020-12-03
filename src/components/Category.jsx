@@ -1,17 +1,47 @@
 import React, { Component } from 'react'
-import {Card} from 'react-bootstrap'
+import {Card,  ListGroup, Alert} from 'react-bootstrap'
 import SideCard from './SideCard'
+import {FaAngleDown, FaAngleUp } from "react-icons/fa"
 
 
 export default class Category extends Component {
+
+    state={
+        all_users_profile: this.props.usersProfile,
+        display_users: [],
+        showMore: false
+    }
+  
+   
+    componentDidMount(){
+        this.setState({all_users_profile : this.props.usersProfile})
+        this.showLessUsers()
+    }
+    
+    
+    showLessUsers = () => {
+       !this.state.showMore && this.setState({display_users: this.state.all_users_profile.slice(0,5), showMore: true })
+    }
+
+    showMoreUsers = () => {
+        this.state.showMore && this.setState({display_users: this.state.all_users_profile.slice(0,10), showMore: false })
+    }
+
+    
     render() {
+        console.log(this.state.all_users_profile)
         return (
-            <Card>
-                <h2 style={{fontSize:"1.5em"}}>{this.props.title}</h2>
-                <SideCard imgSrc="https://media-exp1.licdn.com/dms/image/C4D03AQGKZ7ATy0cbOQ/profile-displayphoto-shrink_100_100/0?e=1612396800&v=beta&t=nO3SEM6k67V2uvH4JBpGPpn1OrFsZ65zvvb4cvzXzMw" title="Tunde Fatoke" description="Lecturer"  />
-                <SideCard imgSrc="https://media-exp1.licdn.com/dms/image/C4E03AQHH-72yiL4USg/profile-displayphoto-shrink_100_100/0?e=1612396800&v=beta&t=14YytL1WyLLe5Pvf5NfqicarAcpq6ycRKC6MMNv6buw" title="Toyin gift" description="IT Specialist" />
-                <SideCard imgSrc="https://media-exp1.licdn.com/dms/image/C5103AQHDnYcH6XpMEA/profile-displayphoto-shrink_100_100/0?e=1612396800&v=beta&t=SSt8PdveU0sh2rQxjvdHRfcm6M7kDukSH1f4RnmYF5I" title="Abeeb Oyelere" description="Lecturer at Dept of Information Science" />
-                <SideCard imgSrc="https://media-exp1.licdn.com/dms/image/C4D03AQHRYKrIDI0nvA/profile-displayphoto-shrink_100_100/0?e=1612396800&v=beta&t=jEYlt28Unfw9woawG-4IIB8EY3AbsMoXXS5lzdjskI8" title="Babatunde Salami" description="Lecturer at FUTA" />
+            <Card className="mt-4" style={{ width: '20rem', borderRadius:"12px"}} >
+                <Card.Title className="text-left m-0 p-0 pt-4 px-3"> <h2 style={{fontSize:"1em"}}>{this.props.title}</h2></Card.Title>
+                <Card.Body className="text-left m-0 p-0  pt-4 px-3">
+                    {
+                        this.state.display_users.map(user =>  <SideCard imgSrc={user.image} title={user.name + " " + user.surname} description={user.title}  />)
+                    }
+                </Card.Body>
+               
+                <ListGroup.Item action className="text-center" onClick ={this.state.showMore ? this.showMoreUsers: this.showLessUsers}>
+                   {this.state.showMore ? (<>Show more <FaAngleDown /></>) : (<>Show less <FaAngleUp /></>) } 
+                </ListGroup.Item>
             </Card>
         )
     }

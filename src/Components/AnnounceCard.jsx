@@ -8,7 +8,7 @@ import './Profile.css'
 export default class AnnounceCard extends Component {
     render() {
         return (
-                <Card style={{ width: '20rem', borderRadius:"12px"}} className="mt-3 pb-2">
+                <Card style={{ width: '20rem', borderRadius:"12px"}} className="pb-2 mb-3">
                                 <Card.Header style={{backgroundColor:"transparent"}}><p className="m-0 p-0 text-right">Announce  <HiOutlineDotsHorizontal/></p> </Card.Header>
                                 <Card.Body className="m-0 p-2">
                                 <p className="m-0 p-0 text-center" style={{fontSize:"13px"}}>Get ahead with competition with linkedin ads</p> 
