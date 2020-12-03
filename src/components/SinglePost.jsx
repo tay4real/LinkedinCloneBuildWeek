@@ -18,9 +18,12 @@ export default class SinglePost extends Component {
       handleClose = () => {
         this.setState({show:false});
       }
-     handleShow = () =>{
+     handleShow = (id) =>{
          this.setState({show: true});
      }
+   
+      
+   
 
     render() {
         return (
@@ -41,10 +44,10 @@ export default class SinglePost extends Component {
                            {this.props.post.text}
                         </Card.Text>
                     </Card.Body>
-                    <Card.Img variant="bottom" src="http://placehold.it/100x50" fluid />
+                    <Card.Img variant="bottom" src={this.props.post.image} fluid />
                     <Card.Footer className="text-muted">
                         <Row>
-                            <Col md={3} className="m-0 p-0">
+                            <Col md={3} className="m-0 p-0" onClick={()=> this.getID(this.props.post._id)}>
                             <AiOutlineLike/>Like
                             </Col>
                             <Col md={3} className="m-0 p-0">
@@ -58,7 +61,7 @@ export default class SinglePost extends Component {
                             </Col>
                         </Row>
                     </Card.Footer>
-                     <NewPostModal show={this.state.show} id={this.state.id} onHide={this.handleClose} />
+                     <NewPostModal show={this.state.show} onHide={this.handleClose} />
                 </Card>    
             </div>
         )

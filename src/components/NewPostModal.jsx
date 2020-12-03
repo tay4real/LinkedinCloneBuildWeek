@@ -4,19 +4,31 @@ import './CreatePostComponent.css';
 import { BiWorld } from 'react-icons/bi';
 
 export default class NewPostModal extends Component {
-    state={
+   
+constructor(props) {
+    super(props);
+    this.state={
         post:{
         text:"",
+        image:""
     },
-    id: "",
+    id: this.props.id,
 }
+  }
+
     updatePostField = (e) => {
         let post = { ...this.state.post} 
         let currentId = e.currentTarget.id 
-        post[currentId] = e.currentTarget.value 
+        if(currentId==="text"){
+        post[currentId] = e.currentTarget.value
+        }else{
+            let value = URL.createObjectURL(e.target.files[0]);
+            console.log(value)
+            post[currentId]=value;
+
+        }
         this.setState({post})
     }
-   
 
     submitPost = async (e) => {
         e.preventDefault();
@@ -26,11 +38,13 @@ export default class NewPostModal extends Component {
                     method: 'POST',
                     body: JSON.stringify(this.state.post),
                     headers: new Headers({
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+                        "Content-type": "application/json",
+                        "Authorization":  `Bearer ${process.env.REACT_APP_API_TOKEN}` ,
                     })
                 })
             if (response.ok) {
+                let info = await response.json()
+                console.log(info)
                 alert('POST PUBLISHED!')
                 this.setState({
                    post: {
@@ -40,6 +54,7 @@ export default class NewPostModal extends Component {
             } else {
                 console.log('an error occurred')
                 let error = await response.json()
+                console.log(this.state.post)
             }
         } catch (e) {
             console.log(e) 
@@ -50,7 +65,7 @@ export default class NewPostModal extends Component {
     render() {
         return (
             <div>
-                <Modal show={this.props.show} onHide={this.props.onHide}>
+                <Modal show={this.props.show} onHide={this.props.onHide} >
                     <Modal.Header closeButton>
                         <Modal.Title>Create a post</Modal.Title>
                     </Modal.Header>
@@ -73,10 +88,11 @@ export default class NewPostModal extends Component {
                                 placeholder="What do you want to talk about?"
                                 className="textAreaPost"
                                 id="text"
-                                value={this.props.id ? this.props.id : this.state.post.text}
+                                value={this.state.post.text}
                                 onChange={this.updatePostField}
                                 rows={3} />
                             </Form.Group>
+                            <input type="file" onChange={this.updatePostField}  id="image" accept="image/*"/>
                             <Button type="submit" className="post-modal-button justify-content-right d-flex ml-auto ">Post</Button>
                         </Form>
                     </Modal.Body>

@@ -10,7 +10,6 @@ export default class Home extends Component {
         posts:[],
     }
     getPost = async () => {
-        console.log("ciao");
             let response = await fetch('https://striveschool-api.herokuapp.com/api/posts/',
                 {
                     method: 'GET',
@@ -20,6 +19,7 @@ export default class Home extends Component {
                 })
                 console.log("sono nel component did mount")
                 let posts= await response.json();
+                console.log(posts)
                 let postsArray= posts.reverse();
                 this.setState({posts: postsArray})
                 console.log("sono nel getPost");
@@ -41,7 +41,7 @@ export default class Home extends Component {
             <CreatePostComponent fetch={this.getPost} />
             {this.state.posts && 
             this.state.posts.map((element) => (
-            <SinglePost post={element}/>
+            <SinglePost post={element} />
             ))}
             </Col >
             <Col md={3} >
