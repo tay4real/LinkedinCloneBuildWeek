@@ -60,3 +60,15 @@
     border-radius: 20px;
     padding: 5px 20px;
 }
+#file-label{
+    position: relative;
+}
+.upload{
+    position: absolute;
+    top:0;
+    left:0;
+    font-size: 30px;
+}
+#file{
+    display: none;
+}

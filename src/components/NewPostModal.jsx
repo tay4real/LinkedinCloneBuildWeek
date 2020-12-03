@@ -2,66 +2,86 @@ import React, { Component } from 'react'
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap'
 import './CreatePostComponent.css';
 import { BiWorld } from 'react-icons/bi';
+import {FcAddImage} from 'react-icons/fc';
 
 export default class NewPostModal extends Component {
-   
-constructor(props) {
-    super(props);
-    this.state={
-        post:{
-        text:"",
-        image:""
-    },
-    id: this.props.id,
-}
-  }
+
+    state = {
+        wholePost: {
+        text: ""
+        },
+        showpost: false,
+        errMessage: "",
+        post: null,
+    };
 
     updatePostField = (e) => {
-        let post = { ...this.state.post} 
-        let currentId = e.currentTarget.id 
-        if(currentId==="text"){
-        post[currentId] = e.currentTarget.value
-        }else{
-            let value = URL.createObjectURL(e.target.files[0]);
-            console.log(value)
-            post[currentId]=value;
+        this.setState({  wholePost: { text: e.target.value } });
+    };
 
+    HandleFile = (e) => {
+        const formData = new FormData();
+        formData.append("post", e.target.files[0]);
+        console.log(process.env.REACT_APP_API_TOKEN)
+        console.log(formData);
+        this.setState({ post: formData });
+    };
+    PostImage = async (id) => {
+        try {
+            let response = await fetch(
+                `https://striveschool-api.herokuapp.com/api/posts/${id}`,
+                {
+                    method: "POST",
+                    body: this.state.post,
+                    headers: {
+                        "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+                    },
+                }
+            );
+            if (response.ok) {
+                console.log("OK");
+                console.log(id)
+            } else {
+                const error = await response.json();
+                console.log(error);
+                console.log("im error but here is id", id);
+            }
+        } catch (error) {
+            console.log(error);
         }
-        this.setState({post})
-    }
+    };
 
     submitPost = async (e) => {
         e.preventDefault();
         try {
-            let response = await fetch('https://striveschool-api.herokuapp.com/api/posts/',
+            let response = await fetch(
+                `https://striveschool-api.herokuapp.com/api/posts/`,
                 {
-                    method: 'POST',
-                    body: JSON.stringify(this.state.post),
-                    headers: new Headers({
-                        "Content-type": "application/json",
-                        "Authorization":  `Bearer ${process.env.REACT_APP_API_TOKEN}` ,
-                    })
-                })
-            if (response.ok) {
-                let info = await response.json()
-                console.log(info)
-                alert('POST PUBLISHED!')
-                this.setState({
-                   post: {
-                       text:''
+                    method: "POST",
+                    body: JSON.stringify(this.state.wholePost),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
                     },
-                })
+                }
+            );
+            if (response.ok) {
+                const data = await response.json();
+                this.setState({
+                    wholePost: { text: "" },
+                });
+                console.log(data)
+                this.PostImage(data._id);
+                this.props.fetch()
             } else {
-                console.log('an error occurred')
-                let error = await response.json()
-                console.log(this.state.post)
+                console.log(this.state.wholePost.text);
+                let error = await response.json();
+                console.log(error);
             }
         } catch (e) {
-            console.log(e) 
+            console.log(e);
         }
-    }
-
-
+    };
     render() {
         return (
             <div>
@@ -82,22 +102,39 @@ constructor(props) {
                                 </div>
                             </Col>
                         </Row>
-                        <Form onSubmit={this.submitPost}>
-                            <Form.Group >
-                                <Form.Control as="textarea" 
-                                placeholder="What do you want to talk about?"
-                                className="textAreaPost"
-                                id="text"
-                                value={this.state.post.text}
-                                onChange={this.updatePostField}
-                                rows={3} />
+                        <Form>
+                            <Form.Group>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    placeholder="what do you want to talk about?"
+                                    style={{ border: "none" }}
+                                    value={this.state. wholePost.text}
+                                    id="text"
+                                    onChange={(e) => this.updatePostField(e)}
+                                />
                             </Form.Group>
-                            <input type="file" onChange={this.updatePostField}  id="image" accept="image/*"/>
-                            <Button type="submit" className="post-modal-button justify-content-right d-flex ml-auto ">Post</Button>
                         </Form>
+                        <label for="file" id="file-label">
+                        <input
+                      type="file"
+                      id="file"
+                      onChange={this.HandleFile}
+                      accept="image/*"
+                    />
+                    <FcAddImage className="upload" />
+                    </label>
+                      <Button
+                    type="submit"
+                    id="post"
+                    onClick={this.submitPost}
+                    className="post-modal-button justify-content-right d-flex ml-auto "
+                  >
+                    Post
+                  </Button>
                     </Modal.Body>
                 </Modal>
-            </div>
+            </div >
         )
     }
 }

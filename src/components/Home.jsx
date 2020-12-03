@@ -41,7 +41,7 @@ export default class Home extends Component {
             <CreatePostComponent fetch={this.getPost} />
             {this.state.posts && 
             this.state.posts.map((element) => (
-            <SinglePost post={element} />
+            <SinglePost post={element} fetch={this.getPost}/>
             ))}
             </Col >
             <Col md={3} >

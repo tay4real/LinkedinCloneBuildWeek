@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Container, Row, Col, Button } from 'react-bootstrap';
+import { Card, Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import './SinglePost.css';
 import {BiDotsHorizontalRounded} from 'react-icons/bi';
 import {AiOutlineLike} from 'react-icons/ai';
@@ -22,7 +22,19 @@ export default class SinglePost extends Component {
          this.setState({show: true});
      }
    
-      
+    handleDelete=async(id)=>{
+        let response= await fetch("https://striveschool-api.herokuapp.com/api/posts/"+id,{       
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+                },        
+        })
+        if(response.ok){
+            alert("deleted successfully");
+            this.props.fetch();
+        }
+
+    }
    
 
     render() {
@@ -37,14 +49,14 @@ export default class SinglePost extends Component {
                             <Col md={9} className="p-0 m-0 d-flex align-items-center justify-content-between">
                                 <p className="text-left p-0 m-0">{this.props.post.username}</p>
                                 {this.props.post.username===process.env.REACT_APP_USER_NAME ?
-                            <BsPencilSquare onClick={()=>this.handleShow(this.props.post._id)}/> :<BiDotsHorizontalRounded className="dot-icon"/>
+                            <BsPencilSquare onClick={()=>this.handleDelete(this.props.post._id)}/> :<BiDotsHorizontalRounded className="dot-icon"/>
                             }</Col>
                         </Row>
                         <Card.Text className="text-left mt-3 px-1">
                            {this.props.post.text}
                         </Card.Text>
                     </Card.Body>
-                    <Card.Img variant="bottom" src={this.props.post.image} fluid />
+                    {this.props.post.image && <Card.Img variant="bottom" src={this.props.post.image} fluid />}
                     <Card.Footer className="text-muted">
                         <Row>
                             <Col md={3} className="m-0 p-0" onClick={()=> this.getID(this.props.post._id)}>
@@ -61,7 +73,7 @@ export default class SinglePost extends Component {
                             </Col>
                         </Row>
                     </Card.Footer>
-                     <NewPostModal show={this.state.show} onHide={this.handleClose} />
+                     <NewPostModal show={this.state.show} onHide={this.handleClose} fetch={this.props.fetch}/>
                 </Card>    
             </div>
         )
