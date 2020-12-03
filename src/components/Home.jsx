@@ -17,12 +17,9 @@ export default class Home extends Component {
                         "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
                     })
                 })
-                console.log("sono nel component did mount")
                 let posts= await response.json();
-                console.log(posts)
                 let postsArray= posts.reverse();
                 this.setState({posts: postsArray})
-                console.log("sono nel getPost");
     }
 
     componentDidMount(){

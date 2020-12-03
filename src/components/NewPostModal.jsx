@@ -109,7 +109,7 @@ export default class NewPostModal extends Component {
                                     rows={3}
                                     placeholder="what do you want to talk about?"
                                     style={{ border: "none" }}
-                                    value={this.state. wholePost.text}
+                                    value={this.state.wholePost.text}
                                     id="text"
                                     onChange={(e) => this.updatePostField(e)}
                                 />
