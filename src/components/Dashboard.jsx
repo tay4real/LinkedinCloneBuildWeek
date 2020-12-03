@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Button, ButtonGroup, Media } from 'react-bootstrap';
 import {BsBookmarkFill} from 'react-icons/bs';
-import './Dashboard.css';
+import '../styles/Dashboard.css';
 export default class Dashboard extends Component {
     render() {
         return (

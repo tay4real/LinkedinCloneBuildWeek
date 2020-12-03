@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, ListGroup, Button, Alert } from 'react-bootstrap';
 import ProfileContainer from './ProfileContainer';
-import './Profile.css'
+import '../styles/Profile.css'
 import ModifyProfileCard from './ModifyProfileCard';
 import AnnounceCard from './AnnounceCard';
 import Dashboard from './Dashboard';

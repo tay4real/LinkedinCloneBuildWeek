@@ -5,7 +5,7 @@ import {HiPhotograph} from 'react-icons/hi';
 import {MdVideoLibrary} from 'react-icons/md';
 import {RiCalendarEventFill} from 'react-icons/ri';
 import {RiArticleLine} from 'react-icons/ri';
-import './CreatePostComponent.css';
+import "../styles/CreatePostComponent.css"
 import NewPostModal from './NewPostModal';
 
 export default class CreatePostComponent extends Component {

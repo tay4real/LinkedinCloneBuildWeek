@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Card, ListGroup, Button } from 'react-bootstrap';
 import { AiFillQuestionCircle } from 'react-icons/ai';
 import {HiOutlineDotsHorizontal} from 'react-icons/hi';
-import logo from './../assets/logo.png';
-import './Profile.css'
 
+import '../styles/Profile.css'
+
+let logo =  './assets/logo.png';
 export default class ModifyProfileCard extends Component {
     render() {
         return (

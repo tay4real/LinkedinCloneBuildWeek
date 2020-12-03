@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, Row, Col, Container } from 'react-bootstrap';
-import './ProfileDetailsCard.css';
+import '../styles/ProfileDetailsCard.css';
 
 export default class ProfileDetailsCard extends Component {
     render() {

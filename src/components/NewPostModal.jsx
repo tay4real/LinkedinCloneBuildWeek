@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap'
-import './CreatePostComponent.css';
+import '../styles/CreatePostComponent.css';
 import { BiWorld } from 'react-icons/bi';
 export default class NewPostModal extends Component {
     state={

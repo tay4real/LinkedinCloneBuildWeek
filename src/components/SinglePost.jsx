@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
-import './SinglePost.css';
+import '../styles/SinglePost.css';
 import {BiDotsHorizontalRounded} from 'react-icons/bi';
 import {AiOutlineLike} from 'react-icons/ai';
 import {RiMessageLine} from 'react-icons/ri';
