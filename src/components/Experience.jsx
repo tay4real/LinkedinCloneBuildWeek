@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Component} from "react";
 import "./Experience.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -15,60 +15,82 @@ import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
 import Backoffice from "./Backoffice";
 import SingleExperience from "./SingleExperience";
 
-export default function Experience() {
-  const [show, setShow] = useState(false);
-  const [experience, setExperience] = useState([]);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+class Experience extends Component {
 
-  const getExperience = async () => {
-    let respons = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`,
-      {
-        method: "GET",
-        headers: new Headers({
-          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-        }),
+  state = {
+    show: false,
+    experience: [],
+  }
+
+  
+
+  handleClose = () => this.setState({show: false});
+  handleShow = () => this.setState({show: true});
+
+  getExperience = async () => {
+    try{
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`,
+        {
+          method: "GET",
+          headers: new Headers({
+            Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+          }),
+        }
+      );
+      if(response.ok){
+        let responseExperience = await response.json();
+        this.setState({experience: responseExperience})
+        console.log(responseExperience)
       }
-    );
-    let responseExperience = await respons.json();
+      
+    }catch(e){
 
-    return responseExperience;
+    }
   };
 
-  useEffect(() => {
-    getExperience().then((data) => {
-      setExperience(data);
-    });
-  }, []);
+  componentDidMount(){
+    this.getExperience();
+  }
 
-  console.log(experience);
-  return (
-    <div>
-      <Card className="experience-container my-2">
-        <Card.Body>
-          <Row className="justify-content-between">
-            <Col className="d-flex justify-content-start">
-              <Card.Title classname="card-title-expereince d-flex justify-content-start">
-                Experience
-              </Card.Title>
-            </Col>
-            <Col className="d-flex justify-content-end">
-              <FaPlus onClick={handleShow} />
-            </Col>
-          </Row>
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.experience !== this.state.experience) {
+      this.getExperience();
+    }
+  }
 
-          {experience &&
-            experience.map((element) => (
-              <SingleExperience experience={element} />
-            ))}
-        </Card.Body>
-        <ListGroup.Item action>
-          Show more
-          <FaAngleDown />
-        </ListGroup.Item>
-      </Card>
-      <Backoffice show={show} onHide={handleClose} getExperience={getExperience}/>
-    </div>
-  );
+  render(){
+    console.log(this.state.experience);
+    return (
+      <div>
+        <Card className="experience-container my-2">
+          <Card.Body>
+            <Row className="justify-content-between">
+              <Col className="d-flex justify-content-start">
+                <Card.Title classname="card-title-expereince d-flex justify-content-start">
+                  Experience
+                </Card.Title>
+              </Col>
+              <Col className="d-flex justify-content-end">
+                <FaPlus onClick={this.handleShow} />
+              </Col>
+            </Row>
+  
+            {this.state.experience &&
+              this.state.experience.map((element) => (
+                <SingleExperience experience={element} />
+              ))}
+          </Card.Body>
+          <ListGroup.Item action className="text-center ">
+            Show more
+            <FaAngleDown />
+          </ListGroup.Item>
+        </Card>
+        <Backoffice  show={this.state.show} onHide={this.handleClose} />
+      </div>
+    );
+  }
+ 
 }
+
+export default Experience

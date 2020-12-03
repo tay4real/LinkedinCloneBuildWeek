@@ -8,34 +8,6 @@ require('dotenv').config();
 
 export default class ProfileContainer extends Component {
 
-    state={
-        user: [],
-    }
-    getUserProfile=async()=>{
-        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
-            "method": "GET", 
-            "headers": new Headers({
-                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
-            })
-        })
-        let user = await response.json();
-        this.setState({user});
-    }
-    getUsersProfile=async()=>{
-        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/",{
-            "method": "GET", 
-            "headers": new Headers({
-                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
-            })
-        })
-        let users = await response.json();
-        console.log(users)
-    }
-
-    componentDidMount(){
-        this.getUserProfile();
-        this.getUsersProfile()
-    }
     render() {
         return (
           <Card className="card-user-profile">
@@ -50,11 +22,11 @@ export default class ProfileContainer extends Component {
                         <Button className="pencil-edit-button"><FaPencilAlt /></Button>
                     </div>
                     <Card.Text className=" text-left text-black">
-                    <h3>{this.state.user.name ?? "name"} {this.state.user.surname ?? "surname"}</h3>
-                        <h5>{this.state.user.title ?? "user job"}</h5>
+                    <h3>{this.props.userProfile.name ?? "name"} {this.props.userProfile.surname ?? "surname"}</h3>
+                        <h5>{this.props.userProfile.title ?? "user job"}</h5>
                     </Card.Text>
                     <Card.Text className=" text-left text-black d-flex">
-                        <p className="p-0 m-0">{this.state.user.area}    • </p>
+                        <p className="p-0 m-0">{this.props.userProfile.area}    • </p>
                         <a className="p-0 m-0 ml-2">500+ connections</a>
                         <p className="p-0 m-0 ml-2"> • </p>
                         <a className="p-0 m-0 ml-2">More info</a>
