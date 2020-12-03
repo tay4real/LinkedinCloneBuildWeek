@@ -58,7 +58,7 @@ export default class SinglePost extends Component {
                             </Col>
                         </Row>
                     </Card.Footer>
-                     <NewPostModal show={this.state.show} fetch={this.props.fetch} id={this.state.id} onHide={this.handleClose} />
+                     <NewPostModal show={this.state.show} id={this.state.id} onHide={this.handleClose} />
                 </Card>    
             </div>
         )

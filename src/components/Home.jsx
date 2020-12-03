@@ -4,6 +4,7 @@ import CreatePostComponent from './CreatePostComponent';
 import SinglePost from './SinglePost';
 import AnnounceCard from './AnnounceCard';
 import ProfileDetailsCard from './ProfileDetailsCard';
+
 export default class Home extends Component {
     state={
         posts:[],
@@ -27,17 +28,7 @@ export default class Home extends Component {
     componentDidMount(){
       this.getPost()
     }
-    componentDidUpdate(prevProp, prevState){
-        if(prevState.posts !== this.state.posts.length){
-            console.log("hiiii")
-            console.log(prevState)
-            console.log(this.state.posts);
-            //this.getPost();
-          
-        }else{
-            console.log("nothing changed");
-        }
-    }
+    
     render() {
         return (
             <>
@@ -47,7 +38,7 @@ export default class Home extends Component {
                 <ProfileDetailsCard/>
             </Col>
             <Col md={6} >
-            <CreatePostComponent fetch={this.getPost}/>
+            <CreatePostComponent fetch={this.getPost} />
             {this.state.posts && 
             this.state.posts.map((element) => (
             <SinglePost post={element}/>

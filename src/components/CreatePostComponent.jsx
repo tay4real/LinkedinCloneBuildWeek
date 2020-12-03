@@ -16,6 +16,7 @@ export default class CreatePostComponent extends Component {
 
       handleClose = () => {
         this.setState({show:false});
+        this.props.fetch();
       }
      handleShow = () =>{
          this.setState({show: true});

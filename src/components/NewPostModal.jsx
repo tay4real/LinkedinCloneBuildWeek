@@ -8,7 +8,6 @@ export default class NewPostModal extends Component {
         post:{
         text:"",
     },
-    mypost: "",
     id: "",
 }
     updatePostField = (e) => {
