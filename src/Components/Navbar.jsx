@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Navbar, Container, Form, Nav, FormControl, Button, InputGroup } from 'react-bootstrap';
-
 import { AiFillHome } from 'react-icons/ai';
 import { FaUserFriends } from 'react-icons/fa';
 import { HiSearch } from 'react-icons/hi';
@@ -11,8 +10,8 @@ import { RiArrowDownSFill } from 'react-icons/ri';
 import { CgMenuGridR } from 'react-icons/cg';
 import '../styles/Navbar.css';
 import { Link, withRouter } from 'react-router-dom'
+import logo from '../assets/logo.png';
 
-let logo = './assets/logo.png';
  class NavBar extends Component {
     render() {
         return (

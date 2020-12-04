@@ -35,7 +35,7 @@ export default class SingeExperience extends Component {
               date={this.props.experience.startDate}
               format="YYYY/MM/DD"
             />{" "}
-            Till:
+             Till: {" "}
             <Moment date={this.props.experience.endDate} format="YYYY/MM/DD" />
           </p>
         </Media.Body>
