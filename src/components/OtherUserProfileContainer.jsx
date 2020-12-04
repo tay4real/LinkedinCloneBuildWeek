@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
-import "./Profile.css";
+import "../styles/Profile.css";
 import { RiArrowDownSFill } from "react-icons/ri";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiFillEye } from "react-icons/ai";
