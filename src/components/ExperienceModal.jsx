@@ -29,7 +29,7 @@ export default class Experience_Modal extends Component {
     HandleFile = (e) => {
         const formData = new FormData();
         formData.append("experience", e.target.files[0]);
-        this.setState({ image: formData }, () => console.log(this.state.image))
+        this.setState({ image: formData })
     };
 
 
@@ -55,7 +55,6 @@ export default class Experience_Modal extends Component {
                 }
             );
             if (response.ok) {
-                console.log("OK");
                 this.getUserExperience()
             } else {
                 const error = await response.json();
@@ -153,7 +152,6 @@ export default class Experience_Modal extends Component {
                     let userExperience = await response.json();
 
                     let experience = userExperience.find(experience => experience._id === this.state.experience_id)
-                    console.log(experience)
                     let expe = { ...this.state.experience }
                     expe.role = experience.role
                     expe.area = experience.area
