@@ -2,7 +2,7 @@ import React from 'react'
 
 const Description = (props) => {
     return (
-        <span>{props.description}</span>
+        <span  style={{color: "black", textDecoration:"none"}}>{props.description}</span>
     )
 }
 
