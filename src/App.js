@@ -30,6 +30,7 @@ class App extends React.Component {
             component={OtherUserDetails}
           />
         </Router>
+        <Footer />
       </div>
     );
   }
