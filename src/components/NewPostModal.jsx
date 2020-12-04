@@ -25,6 +25,7 @@ export default class NewPostModal extends Component {
         this.setState({ post: formData });
     };
     PostImage = async (id) => {
+        
         try {
             let response = await fetch(
                 `https://striveschool-api.herokuapp.com/api/posts/${id}`,
