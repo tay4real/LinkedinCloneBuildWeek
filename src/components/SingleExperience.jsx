@@ -20,13 +20,13 @@ export default class SingeExperience extends Component {
           width={64}
           height={64}
           className="align-self-start mr-3"
-          src={this.props.experience.image}
+          src={this.props.experience.image ? this.props.experience.image : "http://placehold.it//50x50"}
           alt="Generic placeholder"
         />
         <Media.Body>
           <h5 className="d-flex">{this.props.experience.role}</h5>
           <Link to={"/profile/edit/position/" + this.props.experience._id}><span className="d-flex justify-content-end mr-3">
-            <FaPen onClick={this.props.onClick} />
+           {this.state.experience.username===process.env.REACT_APP_USER_NAME && <FaPen onClick={this.props.onClick} />}
           </span></Link>
           <p className="d-flex">{this.props.experience.company}</p>
           <p className="d-flex">
@@ -35,7 +35,7 @@ export default class SingeExperience extends Component {
               date={this.props.experience.startDate}
               format="YYYY/MM/DD"
             />{" "}
-            Till:
+             Till: {" "}
             <Moment date={this.props.experience.endDate} format="YYYY/MM/DD" />
           </p>
         </Media.Body>

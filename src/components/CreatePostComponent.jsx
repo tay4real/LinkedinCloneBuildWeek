@@ -33,6 +33,7 @@ export default class CreatePostComponent extends Component {
                         </InputGroup.Prepend>
                         <Form.Control
                             onClick={this.handleShow}
+                            style={{boxShadow: "none"}}
                             className="postInput"
                             type="text"
                             placeholder="Start a post"

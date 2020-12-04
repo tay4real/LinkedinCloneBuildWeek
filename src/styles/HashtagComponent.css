@@ -1,0 +1,13 @@
+.recent-hashtag{
+    font-weight: 600;
+    font-size: 13px;
+}
+.p-hashtag{
+    font-size: 13px;
+    font-weight: 500;
+}
+.followed-hashtag{
+    font-size: 13px;
+    color: #0073b1;
+    font-weight: 600;
+}
