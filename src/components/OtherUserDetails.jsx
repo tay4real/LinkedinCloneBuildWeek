@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  ListGroup,
-  Button,
-  Alert,
-} from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import OtherUserProfileContainer from "./OtherUserProfileContainer";
 import "./Profile.css";
 import ModifyProfileCard from "./ModifyProfileCard";
