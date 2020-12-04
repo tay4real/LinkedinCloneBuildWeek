@@ -1,5 +1,6 @@
+import { ImageAspectRatio } from '@material-ui/icons';
 import React, { Component } from 'react'
-import { Modal, Button, Form, Col,  InputGroup, FormControl } from 'react-bootstrap';
+import { Modal, Button, Form, Col,  InputGroup, FormControl, Alert } from 'react-bootstrap';
 require('dotenv').config()
 
 export default class Experience_Modal extends Component {
@@ -11,13 +12,17 @@ export default class Experience_Modal extends Component {
             endDate: "", //could be null
             description: "",
             area: "",
+            image: ""
         },
-        user_id : "",
+        experience_id : "",
         delete: false,
         update: false,
         add: false,
-        working: false
+        working: false,
+        uploading: false,
+        images:[]
     }
+
 
    
    
@@ -51,11 +56,12 @@ export default class Experience_Modal extends Component {
             alert(`Something went wrong! ${error}`)
         }
     }
-
+   
     handleUpdate=async(e)=>{
         e.preventDefault();
         try{
-        let response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`,{
+            this.getUserExperience()
+        let response = await fetch(this.url + "/"+ this.state.experience_id,{
             method: "PUT",
             headers: new Headers({
                 "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
@@ -78,7 +84,7 @@ export default class Experience_Modal extends Component {
         e.preventDefault();
         e.preventDefault();
         try{
-        let response = await fetch(this.url,{
+        let response = await fetch(this.url + "/"+ this.state.experience_id,{
                 method: "DELETE",
                 headers: new Headers({
                     "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
@@ -96,8 +102,87 @@ export default class Experience_Modal extends Component {
         }
     }
     
-    render() {
+    getUserExperience=async()=>{
+        if(this.props.edit){
+            try{
+                let response = await fetch( `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences/${this.state.experience_id}`,{
+                    "method": "GET", 
+                    "headers": new Headers({
+                        "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
+                    })
+                })
+                if(response.ok){
         
+                    let userExperience = await response.json();
+        
+                    let experience = userExperience.find(experience => experience._id === this.state.experience_id)
+                    console.log(experience)
+                    let expe = { ...this.state.experience } 
+                    expe.role = experience.role
+                    expe.area = experience.area
+                    expe.company = experience.company
+                    expe.description = experience.description
+                    expe.endDate = experience.endDate
+                    expe.startDate = experience.startDate
+                    this.setState({experience: expe});
+                }else{
+                    Alert("An error occured")
+                } 
+            }catch(error){
+    
+            }
+        }     
+    }
+
+    handleImageUpload = async(e) => {
+        const files = Array.from(e.target.file)
+        this.setState({uploading: true})
+
+        const formData = new FormData()
+
+        files.forEach((file,i) => {
+            formData.append(i, file)
+        })
+
+        try{
+            let response = await fetch(this.url,{
+                method: "POST",
+                headers: new Headers({
+                    "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+                    "Content-Type": "application/json",
+                }),
+                body: JSON.stringify(formData),
+                })
+                if(response.ok){
+                    let images= await response.json();
+                    this.setState({uploading:false,images
+                    })
+                }else{
+                    alert("Something went wrong!");
+                }
+            }catch(error){
+                alert(`Something went wrong! ${error}`)
+            }
+       
+    }
+
+    removeImage = id => {
+        this .setState({
+            images: this.state.images.filter(image => image.publiic_id !== id)
+        })
+    }
+    componentDidMount(previousProps) {
+        if(this.props.experience_id !== ""){
+            this.setState({experience_id: this.props.experience_id}) 
+        }
+       
+        if(this.props.edit){
+            this.getUserExperience();
+        }
+    }
+    
+    render() {
+       
         return (
             <div>
                 <Modal size="lg" show={this.props.show} onHide={this.props.onHide}>
@@ -108,7 +193,7 @@ export default class Experience_Modal extends Component {
                     <Form onSubmit={this.handleSubmit}  >
                         <Modal.Body style={{overflowY: "scroll", maxHeight: "60vh"}}>
                             <Form.Row>
-                                <Form.Group as={Col} controlId="formGridTitle">
+                                <Form.Group as={Col}>
                                     <Form.Label htmlFor="role">Title *</Form.Label>
                                     <Form.Control type="text" id="role" placeholder="Ex: Retails Sales Manager" 
                                     value={this.state.experience.role}
@@ -116,55 +201,19 @@ export default class Experience_Modal extends Component {
                                 </Form.Group>
                             </Form.Row>
                             
+                            
                             <Form.Row>
-                                <Form.Group as={Col} controlId="formGridEmpType">
-                                    <Form.Label htmlFor="">
-                                        Employment Type
-                                    </Form.Label>
-                                    <Form.Control
-                                        as="select"
-                                        name="role"
-                                        id=""
-                                        value={""}
-                                        onChange={""}
-                                    >
-                                        <option>-</option>
-                                        <option>Full-time</option>
-                                        <option>Part-time</option>
-                                        <option>Self-employed</option>
-                                        <option>Freelance</option>
-                                        <option>Contract</option>
-                                        <option>Internship</option>
-                                        <option>Apprenticeship</option>
-                                        <option>Seasonal</option>
-                                    </Form.Control>
-                                    <span>Country-specific employment types</span>
-                                    <span>Learn more</span>
-                                </Form.Group>              
-                            </Form.Row>
-
-                            <Form.Row>
-                                <Form.Group as={Col}  controlId="formGridCompany">
+                                <Form.Group as={Col} >
                                     <Form.Label  htmlFor="company">Company *</Form.Label>
-                                    <Form.Control id="company" type="text" placeholder="Enter the company"
+                                    <Form.Control id="company" type="text" placeholder="e.g Strive School"
                                             value={this.state.experience.company}
                                             onChange={this.updateField} />
                                     <span></span>
                                 </Form.Group>
                             </Form.Row>
-                 
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formGridLocation">
-                                    <Form.Label  htmlFor="area">Location</Form.Label>
-                                    <Form.Control id="area" type="text" placeholder="Ex: London, United Kingdom" 
-                                    value={this.state.experience.area}
-                                    onChange={this.updateField}/>
-                                    <span></span>
-                                </Form.Group>       
-                            </Form.Row>
 
                             <Form.Row>
-                                <Form.Group as= {Col} controlId="formGridCurrentlyWorking" md={12} className="flex flex-column align-self-end">
+                                <Form.Group as= {Col}  md={12} className="flex flex-column align-self-end">
                                     <Form.Label>
                                         <Form.Check
                                             type="checkbox"
@@ -202,26 +251,40 @@ export default class Experience_Modal extends Component {
                                     />
                                 </Form.Group>
                             </Form.Row>
-                            
+
                             <Form.Row>
-                                    <Form.Group as={Col} controlId="formGridDescription">
+                                    <Form.Group as={Col} >
                                         <Form.Label>Description</Form.Label>
                                         <Form.Control id="description"  as="textarea" rows={3} value={this.state.experience.description} onChange={this.updateField} />
                                     </Form.Group>        
                             </Form.Row>
-   
+
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label  htmlFor="area">Location</Form.Label>
+                                    <Form.Control id="area" type="text" placeholder="Ex: London, United Kingdom" 
+                                    value={this.state.experience.area}
+                                    onChange={this.updateField}/>
+                                    <span></span>
+                                </Form.Group>       
+                            </Form.Row>
+
                             <Form.Row>
 
-                                    <Form.Group as={Col} controlId="formGridDescription">
+                                    <Form.Group as={Col}>
                                         <Form.Label><span>Media</span><br/> 
 Add or link to external documents, photos, sites, videos, and presentations.</Form.Label>
                                        <Form.Row>
                                            <Form.Group as={Col}>
-                                               
-                                                <Form.File.Input className="btn" variant="primary" block className="rounded-pill" onClick="" />
+                                                <Form.File.Input className="btn"  variant="primary" block className="rounded-pill" name="experience"
+                                        id="experience"
+                                        placeholder="Image Upload"
+                                        value={this.state.experience.experience}
+                                        onClick={this.handleImageUpload}  
+                                      />
                                            </Form.Group>
                                            <Form.Group as={Col}>
-                                                <Button variant="outline-primary"   className="rounded-pill" block onClick="" >
+                                                <Button variant="outline-primary"   className="rounded-pill" block onClick={this.state.toggle} >
                                                     Link
                                                 </Button>
                                            </Form.Group>
@@ -247,11 +310,11 @@ Add or link to external documents, photos, sites, videos, and presentations.</Fo
                         <Modal.Footer>
                             <Form.Row className="justify-content-bewteen">
                                 {this.props.edit && <><Form.Group as = {Col} md={6} >
-                                    <Button variant="outline-secondary" className="rounded-pill"  >
+                                    <Button variant="outline-secondary" className="rounded-pill" onClick = {this.handleDelete}  >
                                         Delete
                                     </Button>
                                 </Form.Group> <Form.Group as = {Col} md={6} >
-                                    <Button variant="primary" type="submit"  className="rounded-pill">
+                                    <Button variant="primary"  className="rounded-pill" onClick={this.handleUpdate}>
                                         Save
                                     </Button>
                                 </Form.Group> </>}

@@ -6,6 +6,7 @@ import NavBar from './components/Navbar';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import ProfileComponent from './components/ProfileComponent';
 import Home from './components/Home'
+import ExperienceModal from './components/ExperienceModal';
 
 class App extends React.Component {
 
@@ -28,9 +29,16 @@ class App extends React.Component {
         props 
         ) => <ProfileComponent  {...props} />} 
         />
-        
+       
+       <Route
+        path="/profile/edit/position/:id"
+        exact
+        render={(
+        props 
+        ) => <ProfileComponent  {...props} />} 
+        />
       </Router>
-
+      <Footer />
     </div>
   );
   }

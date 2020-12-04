@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import { Media } from "react-bootstrap";
 import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
 import ExperienceModal from "./ExperienceModal";
+import { Link } from "react-router-dom";
 
 export default class SingeExperience extends Component {
   state = {
@@ -24,9 +25,9 @@ export default class SingeExperience extends Component {
         />
         <Media.Body>
           <h5 className="d-flex">{this.props.experience.role}</h5>
-          <span className="d-flex justify-content-end mr-3">
+          <Link to={"/profile/edit/position/" + this.props.experience._id}><span className="d-flex justify-content-end mr-3">
             <FaPen onClick={this.props.onClick} />
-          </span>
+          </span></Link>
           <p className="d-flex">{this.props.experience.company}</p>
           <p className="d-flex">
             Since:

@@ -5,6 +5,7 @@ import {Card, Row,Col,ListGroup} from "react-bootstrap";
 import { FaPlus,FaAngleDown } from "react-icons/fa";
 import ExperienceModal from "./ExperienceModal";
 import SingleExperience from "./SingleExperience";
+import { Link } from "react-router-dom";
 
 class Experience extends Component {
 
@@ -12,6 +13,7 @@ class Experience extends Component {
     add: false,
     edit: false,
     experience: [],
+   
   }
 
   
@@ -55,7 +57,7 @@ class Experience extends Component {
   }
 
   render(){
-    console.log(this.state.experience)
+   
     return (
       <div>
         <Card className="experience-container my-2">
@@ -66,14 +68,14 @@ class Experience extends Component {
                   Experience
                 </Card.Title>
               </Col>
-              <Col className="d-flex justify-content-end">
+              <Link to="/profile/edit/position/new"><Col className="d-flex justify-content-end">
                 <FaPlus onClick={this.handleAddOpen} />
-              </Col>
+              </Col></Link>
             </Row>
   
             {this.state.experience &&
-              this.state.experience.map((element) => (
-                <SingleExperience key={element.id} experience={element} onClick={this.handleEditOpen}/>
+              this.state.experience.map((element) =>  ( 
+                <SingleExperience key={element._id} experience={element} onClick={this.handleEditOpen}/>
               ))}
           </Card.Body>
           <ListGroup.Item action className="text-center ">
@@ -82,7 +84,7 @@ class Experience extends Component {
           </ListGroup.Item>
         </Card>
         {this.state.add && <ExperienceModal show={this.state.add} add={this.state.add} onHide={this.handleAddClose} />}
-        {this.state.edit && <ExperienceModal show={this.state.edit} edit={this.state.edit} onHide={this.handleEditClose} />}
+        {this.state.edit && <ExperienceModal show={this.state.edit} edit={this.state.edit} onHide={this.handleEditClose} experience_id = {this.props.experience_id} />}
       </div>
     );
   }

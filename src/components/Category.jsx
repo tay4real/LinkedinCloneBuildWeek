@@ -29,13 +29,12 @@ export default class Category extends Component {
 
     
     render() {
-       
         return (
             <Card className="mt-4" style={{ width: '20rem', borderRadius:"12px"}} >
                 <Card.Title className="text-left m-0 p-0 pt-4 px-3"> <h2 style={{fontSize:"1em"}}>{this.props.title}</h2></Card.Title>
                 <Card.Body className="text-left m-0 p-0  pt-4 px-3">
                     {
-                        this.state.display_users.map(user =>  <SideCard imgSrc={user.image} title={user.name + " " + user.surname} description={user.title}  />)
+                        this.state.display_users.map(user =>  <SideCard key={user._id }imgSrc={user.image} title={user.name + " " + user.surname} description={user.title}  />)
                     }
                 </Card.Body>
                
