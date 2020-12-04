@@ -66,7 +66,7 @@ export default class ProfileComponent extends Component {
   }
 
     render() {
-        console.log(this.state.userProfile)
+     
         return (
             <>
                 <Container>
@@ -74,7 +74,7 @@ export default class ProfileComponent extends Component {
                         <Col md={8}>
                             {this.state.userProfile.length !== 0 ? <ProfileContainer userProfile={this.state.userProfile} /> :  <Loader />}
                             <Dashboard />
-                            <Experience />
+                            <Experience experience_id = {this.props.match.params.id}/>
                             <Interests/>
                         </Col>
                         <Col md={4} style={{flexDirection:"column", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"center"}}>
