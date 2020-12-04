@@ -14,7 +14,7 @@ import { HiSearch } from "react-icons/hi";
 import { BsFillBriefcaseFill } from "react-icons/bs";
 import { RiMessage2Fill } from "react-icons/ri";
 import { RiNotification3Fill } from "react-icons/ri";
-import { RiArrowDownSFill } from "react-icons/ri";
+
 import { CgMenuGridR } from "react-icons/cg";
 import "../styles/Navbar.css";
 import { Link, withRouter } from "react-router-dom";
@@ -117,7 +117,14 @@ class NavBar extends Component {
                     className="nav-link d-flex m-0 p-0"
                     style={{height:"10px", fontSize: "17px",marginTop:"10px", boxShadow: "none"}}
                   >
+<<<<<<< Updated upstream
                   
+=======
+                    <img src={logo} className="profile-img" alt="profile-img" />
+                    <p>
+                      Me {" "}
+                    </p>
+>>>>>>> Stashed changes
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="px-2">
                     <Dropdown.Item href="/profile">
