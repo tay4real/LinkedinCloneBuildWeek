@@ -9,10 +9,6 @@ import {CgUserAdd} from 'react-icons/cg'
 
 export default class SideCard extends Component {
 
-    state = {
-
-    }
-
     render() {
         return (
          

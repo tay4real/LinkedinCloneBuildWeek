@@ -2,54 +2,87 @@ import React, { Component } from 'react'
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap'
 import '../styles/CreatePostComponent.css';
 import { BiWorld } from 'react-icons/bi';
-export default class NewPostModal extends Component {
-    state={
-        post:{
-        text:"",
-    }
-}
+import {FcAddImage} from 'react-icons/fc';
 
+export default class NewPostModal extends Component {
+
+    state = {
+        wholePost: {
+        text: ""
+        },
+        showpost: false,
+        errMessage: "",
+        post: null,
+    };
 
     updatePostField = (e) => {
-        let post = { ...this.state.post} 
-        let currentId = e.currentTarget.id 
-        post[currentId] = e.currentTarget.value 
-        this.setState({post})
-    }
+        this.setState({  wholePost: { text: e.target.value } });
+    };
+
+    HandleFile = (e) => {
+        const formData = new FormData();
+        formData.append("post", e.target.files[0]);
+        this.setState({ post: formData });
+    };
+    PostImage = async (id) => {
+        
+        try {
+            let response = await fetch(
+                `https://striveschool-api.herokuapp.com/api/posts/${id}`,
+                {
+                    method: "POST",
+                    body: this.state.post,
+                    headers: {
+                        "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+                    },
+                }
+            );
+            if (response.ok) {
+                console.log("OK");
+                this.props.fetch()
+            } else {
+                const error = await response.json();
+                console.log(error);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     submitPost = async (e) => {
         e.preventDefault();
         try {
-            let response = await fetch('https://striveschool-api.herokuapp.com/api/posts/',
+            let response = await fetch(
+                `https://striveschool-api.herokuapp.com/api/posts/`,
                 {
-                    method: 'POST',
-                    body: JSON.stringify(this.state.post),
-                    headers: new Headers({
+                    method: "POST",
+                    body: JSON.stringify(this.state.wholePost),
+                    headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-                    })
-                })
-            if (response.ok) {
-                alert('POST PUBLISHED!')
-                this.setState({
-                   post: {
-                       text:''
+                        Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
                     },
-                })
+                }
+            );
+            if (response.ok) {
+                const data = await response.json();
+                this.setState({
+                    wholePost: { text: "" },
+                });
+                this.PostImage(data._id);
+                this.props.fetch()
+                this.props.onHide()
             } else {
-                console.log('an error occurred')
-                let error = await response.json()
+                let error = await response.json();
+                console.log(error);
             }
         } catch (e) {
-            console.log(e) 
+            console.log(e);
         }
-    }
-
-
+    };
     render() {
         return (
             <div>
-                <Modal show={this.props.show} onHide={this.props.onHide}>
+                <Modal show={this.props.show} onHide={this.props.onHide} >
                     <Modal.Header closeButton>
                         <Modal.Title>Create a post</Modal.Title>
                     </Modal.Header>
@@ -66,27 +99,39 @@ export default class NewPostModal extends Component {
                                 </div>
                             </Col>
                         </Row>
-                        <Form onSubmit={this.submitPost}>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <Form.Control as="textarea" 
-                                placeholder="What do you want to talk about?"
-                                className="textAreaPost"
-                                id="text"
-                                value={this.state.post.text}
-                                onChange={this.updatePostField}
-                                rows={3} />
+                        <Form>
+                            <Form.Group>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    placeholder="what do you want to talk about?"
+                                    style={{ border: "none" }}
+                                    value={this.state.wholePost.text}
+                                    id="text"
+                                    onChange={(e) => this.updatePostField(e)}
+                                />
                             </Form.Group>
-                            <Button type="submit">Post</Button>
                         </Form>
+                        <label for="file" id="file-label">
+                        <input
+                      type="file"
+                      id="file"
+                      onChange={this.HandleFile}
+                      accept="image/*"
+                    />
+                    <FcAddImage className="upload" />
+                    </label>
+                      <Button
+                    type="submit"
+                    id="post"
+                    onClick={this.submitPost}
+                    className="post-modal-button justify-content-right d-flex ml-auto "
+                  >
+                    Post
+                  </Button>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.onHide}>
-                            Close
-                    </Button>
-                    </Modal.Footer>
                 </Modal>
-            </div>
+            </div >
         )
     }
 }
-

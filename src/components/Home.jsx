@@ -4,12 +4,12 @@ import CreatePostComponent from './CreatePostComponent';
 import SinglePost from './SinglePost';
 import AnnounceCard from './AnnounceCard';
 import ProfileDetailsCard from './ProfileDetailsCard';
+
 export default class Home extends Component {
     state={
         posts:[],
     }
-    getPost = async (e) => {
-        try {
+    getPost = async () => {
             let response = await fetch('https://striveschool-api.herokuapp.com/api/posts/',
                 {
                     method: 'GET',
@@ -17,21 +17,15 @@ export default class Home extends Component {
                         "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
                     })
                 })
-            if (response.ok) {
                 let posts= await response.json();
-                this.setState({posts})
-                console.log(posts);
-            } else {
-                console.log('an error occurred')
-                let error = await response.json()
-            }
-        } catch (e) {
-            console.log(e) 
-        }
+                let postsArray= posts.reverse().splice(0,30);
+                this.setState({posts: postsArray})
     }
+
     componentDidMount(){
-        this.getPost()
+      this.getPost()
     }
+    
     render() {
         return (
             <>
@@ -41,20 +35,17 @@ export default class Home extends Component {
                 <ProfileDetailsCard/>
             </Col>
             <Col md={6} >
-            <CreatePostComponent />
+            <CreatePostComponent fetch={this.getPost} />
             {this.state.posts && 
             this.state.posts.map((element) => (
-            <SinglePost post={element}/>
+            <SinglePost post={element} fetch={this.getPost}/>
             ))}
             </Col >
             <Col md={3} >
             <AnnounceCard/>
             <AnnounceCard/>
             <AnnounceCard/>
-
-
             </Col>
-
                  </Row>
              </Container>
             </>

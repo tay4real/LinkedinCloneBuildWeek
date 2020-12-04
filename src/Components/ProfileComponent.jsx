@@ -65,7 +65,7 @@ export default class ProfileComponent extends Component {
             <>
                 <Container>
                     <Row className="mt-5">
-                        <Col md={8} style={{}}>
+                        <Col md={8}>
                             {this.state.userProfile.length !== 0 ? <ProfileContainer userProfile={this.state.userProfile} /> :  <Loader />}
                             <Dashboard />
                             <Experience />

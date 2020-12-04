@@ -39,9 +39,7 @@ export default class Experience_Modal extends Component {
     }
     }
     render() {
-        console.log(process.env.REACT_APP_USER_ID);
-        
-
+    
         return (
             <div>
                 <Modal show={this.props.show} onHide={this.props.onHide}>
