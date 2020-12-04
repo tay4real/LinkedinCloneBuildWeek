@@ -21,6 +21,11 @@ class App extends React.Component {
             render={(props) => <ProfileComponent {...props} />}
           />
           <Route
+            path="/profile/edit/position/:id"
+            exact
+            render={(props) => <ProfileComponent {...props} />}
+          />
+          <Route
             path="/other-user-details/:userId"
             component={OtherUserDetails}
           />
