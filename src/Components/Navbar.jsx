@@ -122,11 +122,10 @@ class NavBar extends Component {
                   <Dropdown.Menu className="px-2">
                     <Dropdown.Item href="/profile">
                       <img
-                        width={10}
-                        height={10}
+                       
                         className="align-self-left mr-2"
                         id="profile-image"
-                        style={{ borderRadius: "50%" }}
+                        style={{ borderRadius: "50%", width:"50px", height:"50px" }}
                         src={this.state.user.image}
                         alt="Generic placeholder"
                       />
