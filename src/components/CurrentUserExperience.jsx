@@ -1,11 +1,11 @@
-import React, { Component} from "react";
-import "../styles/Experience.css";
+import React, { Component } from "react";
+import "./Experience.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Row, Col, ListGroup } from "react-bootstrap";
 import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
-import Experience_Modal from "./Experience_Modal";
+import Backoffice from "./Backoffice";
 import SingleExperience from "./SingleExperience";
-
+import { withRouter } from "react-router-dom";
 class Experience extends Component {
   state = {
     show: false,
@@ -18,7 +18,7 @@ class Experience extends Component {
   getExperience = async () => {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.match.params.userId}/experiences/`,
         {
           method: "GET",
           headers: new Headers({
@@ -71,10 +71,10 @@ class Experience extends Component {
             <FaAngleDown />
           </ListGroup.Item>
         </Card>
-        <Experience_Modal show={this.state.show} onHide={this.handleClose} />
+        <Backoffice show={this.state.show} onHide={this.handleClose} />
       </div>
     );
   }
 }
 
-export default Experience;
+export default withRouter(Experience);
