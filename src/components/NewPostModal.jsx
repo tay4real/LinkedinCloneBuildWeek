@@ -53,7 +53,6 @@ export default class NewPostModal extends Component {
                 }
             );
             if (response.ok) {
-                console.log("OK");
                 this.props.fetch()
             } else {
                 const error = await response.json();
