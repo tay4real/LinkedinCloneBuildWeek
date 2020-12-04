@@ -173,9 +173,6 @@ export default class SinglePost extends Component {
                                 </Form.Group>
                             </Form></Modal.Body>
                         <Modal.Footer>
-                            <Button variant="secondary" onClick={this.handleClose}>
-                                Close
-                            </Button>
                             <Button variant="primary" onClick={() => this.handleUpdate(this.props.post._id)}>
                                 Save Changes
                             </Button>
