@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Modal, Button, Form, Col,  InputGroup, FormControl, Alert } from 'react-bootstrap';
 require('dotenv').config()
 
-export default class ExperienceModal extends Component {
+export default class Experience_Modal extends Component {
     state = {
         experience: {
             role: "",
@@ -20,7 +20,7 @@ export default class ExperienceModal extends Component {
         add: false,
         working: false,
         uploading: false,
-        images:[]
+       
     }
 
 
@@ -134,43 +134,9 @@ export default class ExperienceModal extends Component {
         }     
     }
 
-    handleImageUpload = async(e) => {
-        const files = Array.from(e.target.file)
-        this.setState({uploading: true})
+    
 
-        const formData = new FormData()
-
-        files.forEach((file,i) => {
-            formData.append(i, file)
-        })
-
-        try{
-            let response = await fetch(this.url,{
-                method: "POST",
-                headers: new Headers({
-                    "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-                    "Content-Type": "application/json",
-                }),
-                body: JSON.stringify(formData),
-                })
-                if(response.ok){
-                    let images= await response.json();
-                    this.setState({uploading:false,images
-                    })
-                }else{
-                    alert("Something went wrong!");
-                }
-            }catch(error){
-                alert(`Something went wrong! ${error}`)
-            }
-       
-    }
-
-    removeImage = id => {
-        this .setState({
-            images: this.state.images.filter(image => image.publiic_id !== id)
-        })
-    }
+  
     componentDidMount(previousProps) {
         if(this.props.experience_id !== ""){
             this.setState({experience_id: this.props.experience_id}) 
@@ -276,11 +242,7 @@ export default class ExperienceModal extends Component {
 Add or link to external documents, photos, sites, videos, and presentations.</Form.Label>
                                        <Form.Row>
                                            <Form.Group as={Col}>
-                                                <Form.File.Input className="btn"  variant="primary" block className="rounded-pill" name="experience"
-                                        id="experience"
-                                        placeholder="Image Upload"
-                                        value={this.state.experience.experience}
-                                        onClick={this.handleImageUpload}  
+                                                <Form.File.Input className="btn"  variant="primary" block className="rounded-pill" 
                                       />
                                            </Form.Group>
                                            <Form.Group as={Col}>
