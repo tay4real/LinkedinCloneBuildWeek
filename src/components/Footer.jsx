@@ -9,7 +9,7 @@ function Footer() {
     <>
 
       <footer >
-        <Container className="containers mt-5 justify-content-center align-items-center text-center">
+        <Container className="containers mt-5  justify-content-center align-items-center text-center">
           <img src="/LI-Logo.png" className="mt-4 d-flex " />
           <Row className="mt-4 flex-column text-left">
             <div className="d-flex">

@@ -8,7 +8,8 @@ import Dashboard from './Dashboard';
 import Category from './Category';
 import Interests from './Interests';
 import Experience from './Experience';
-import Loader from './Loader'
+import Loader from './Loader';
+import Footer from './Footer';
 
 
 export default class ProfileComponent extends Component {
@@ -76,11 +77,11 @@ export default class ProfileComponent extends Component {
                            <AnnounceCard/>
                            {this.state.allUsersProfile.length !== 0 ?<> <Category title="People also viewed" usersProfile ={this.state.allUsersProfile} />
                            <Category title="People you may know" usersProfile ={this.state.allUsersProfile.slice(5)} /> 
-                            </>:  <Loader />}
-                         
+                            </>:  <Loader />}                      
                         </Col>
                     </Row>
                 </Container>
+                <Footer />
             </>
         )
     }
