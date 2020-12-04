@@ -17,8 +17,7 @@ export default class SingeExperience extends Component {
       <>
       <Media className="mt-2">
         <img
-          width={64}
-          height={64}
+          style={{height:"100px", width:"100px"}}
           className="align-self-start mr-3"
           src={this.props.experience.image ? this.props.experience.image : "http://placehold.it//50x50"}
           alt="Generic placeholder"
