@@ -9,6 +9,7 @@ import { Card, Container, Row, Col, Button, Spinner, Modal, Form, DropdownButton
 import { BsPencilSquare } from 'react-icons/bs';
 import {BsTrashFill} from 'react-icons/bs';
 import {BsBookmarkFill, BsFillEyeFill} from 'react-icons/bs';
+import Loader from './Loader';
 
 import NewPostModal from './NewPostModal';
 export default class SinglePost extends Component {
@@ -16,14 +17,20 @@ export default class SinglePost extends Component {
         user:[],
         open: true,
         show: false,
+        click: false,
         id: "",
         post: {
             text: "",
         }
+
     }
 
+    clickLike=()=>{
+        this.setState({click: !this.state.click});
+    }
     handleClose = () => {
         this.setState({ show: false });
+        this.setState({post:{ text: ""}})
     }
     handleShow = (id) => {
         this.setState({ show: true });
@@ -124,20 +131,20 @@ export default class SinglePost extends Component {
                             {this.props.post.text}
                         </Card.Text>
                     </Card.Body>
-                    {this.props.post.image && <Card.Img variant="bottom" src={this.props.post.image} />}
+                    {this.props.post.image && <Card.Img variant="bottom" src={this.props.post.image} /> }
                     <Card.Footer className="text-muted">
                         <Row>
-                            <Col md={3} className="m-0 p-0" >
-                                <AiOutlineLike />Like
+                            <Col md={3} className="m-0 p-0" style={this.state.click ? {color: "#0069D9"}: {color: "grey"}}>
+                                <AiOutlineLike className="mr-1" onClick={()=>this.clickLike()}/>Like
                             </Col>
                             <Col md={3} className="m-0 p-0">
-                                <RiMessageLine />Comment
+                                <RiMessageLine  className="mr-1"/>Comment
                             </Col>
                             <Col md={3} className="m-0 p-0">
-                                <IoMdShareAlt />Share
+                                <IoMdShareAlt  className="mr-1"/>Share
                             </Col>
                             <Col md={3} className="m-0 p-0">
-                                <RiSendPlaneFill />Send
+                                <RiSendPlaneFill  className="mr-1"/>Send
                             </Col>
                         </Row>
                     </Card.Footer>

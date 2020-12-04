@@ -30,13 +30,11 @@ a:hover {
 #privacy {
   border: none;
   background-color: transparent;
-  margin-right: 2px;
   font-size: 12px;
   color: #57687a;
   font-weight: bold;
 }
 #privacyItems {
   background-color: white;
-  margin-right: 2px;
   font-size: 12px;
 }

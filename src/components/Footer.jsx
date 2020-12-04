@@ -8,13 +8,12 @@ function Footer() {
 
     <>
 
-      <footer >
-        <Container className="containers mt-5  justify-content-center align-items-center text-center">
-          <img src="/LI-Logo.png" className="mt-4 d-flex " />
-          <Row className="mt-4 flex-column text-left">
+        <Container className="containers mt-5 d-flex justify-content-center text-center p-0">
+          <img src="/LI-Logo.png" className="mt-4 mr-5 " />
+          <Row className="mt-4 justify-content-center text-center d-flex">
             <div className="d-flex">
               <Col xs={2}>
-                <div className="d-flex flex-column">
+                <div className="d-flex flex-column text-left">
                   <a href="/">About</a>
                   <a href="/">Community Guidelines</a>
                   <Dropdown>
@@ -33,7 +32,7 @@ function Footer() {
                 </div>
               </Col>
               <Col xs={2}>
-                <div className="d-flex flex-column">
+                <div className="d-flex flex-column text-left">
                   <a href="/">Accessibility</a>
                   <a href="/">Careers</a>
                   <a href="/">Ad Choices</a>
@@ -41,7 +40,7 @@ function Footer() {
                 </div>
               </Col>
               <Col xs={2}>
-                <div className="d-flex flex-column">
+                <div className="d-flex flex-column text-left">
                   <a href="/">Talent Solutions</a>
                   <a href="/">Marketing Solutions</a>
                   <a href="/">Advertising</a>
@@ -49,7 +48,7 @@ function Footer() {
                 </div>
               </Col>
               <Col xs={3}>
-                <div className="d-flex flex-column">
+                <div className="d-flex flex-column text-left">
                   <a href="/">
                     Questions? </a>
                   <p><small>Visit our Help Center.</small></p>
@@ -61,20 +60,19 @@ function Footer() {
                 </div>
               </Col>
               <Col xs={3}>
-                <div className="d-flex flex-column">
+                <div className="d-flex flex-column text-left">
                   <label>Select Language</label>
                   <select>
                     <option>
                       English (english)
                     </option>
                   </select>
+                  <p className="ml-2 mt-2" id>LinkedIn Corporation © 2020</p>
                 </div>
               </Col>
             </div>
-            <p className="ml-2" id>LinkedIn Corporation © 2020</p>
           </Row>
         </Container>
-      </footer>
 
     </>
   );
