@@ -20,7 +20,7 @@ export default class Experience_Modal extends Component {
         add: false,
         working: false,
         uploading: false,
-       
+        images:[]
     }
 
 
@@ -134,9 +134,43 @@ export default class Experience_Modal extends Component {
         }     
     }
 
-    
+    handleImageUpload = async(e) => {
+        const files = Array.from(e.target.file)
+        this.setState({uploading: true})
 
-  
+        const formData = new FormData()
+
+        files.forEach((file,i) => {
+            formData.append(i, file)
+        })
+
+        try{
+            let response = await fetch(this.url,{
+                method: "POST",
+                headers: new Headers({
+                    "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+                    "Content-Type": "application/json",
+                }),
+                body: JSON.stringify(formData),
+                })
+                if(response.ok){
+                    let images= await response.json();
+                    this.setState({uploading:false,images
+                    })
+                }else{
+                    alert("Something went wrong!");
+                }
+            }catch(error){
+                alert(`Something went wrong! ${error}`)
+            }
+       
+    }
+
+    removeImage = id => {
+        this .setState({
+            images: this.state.images.filter(image => image.publiic_id !== id)
+        })
+    }
     componentDidMount(previousProps) {
         if(this.props.experience_id !== ""){
             this.setState({experience_id: this.props.experience_id}) 
@@ -197,10 +231,10 @@ export default class Experience_Modal extends Component {
                                     <Form.Label>Start Date *</Form.Label>
                                   
                                     <Form.Control
-                                        type="datetime-local"
-                                        name="dateTime"
+                                        type="date"
+                                        name="startDate"
                                         id="startDate"
-                                        placeholder="Date and Time"
+                                        placeholder="Start Date"
                                         value={this.state.experience.startDate}
                                         onChange={this.updateField}  
                                     />
@@ -208,10 +242,10 @@ export default class Experience_Modal extends Component {
                                 <Form.Group as ={Col} md={6}>
                                     <Form.Label>End Date *</Form.Label>
                                     <Form.Control
-                                        type="datetime-local"
-                                        name="dateTime"
+                                        type="date"
+                                        name="endDate"
                                         id="endDate"
-                                        placeholder="Date and Time"
+                                        placeholder="End Date"
                                         value={this.state.experience.endDate}
                                         onChange={this.updateField} 
                                     />

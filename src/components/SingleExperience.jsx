@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
 import { Media } from "react-bootstrap";
-import { FaPlus, FaPen, FaAngleDown } from "react-icons/fa";
-import ExperienceModal from "./ExperienceModal";
+import { FaPen } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 
 export default class SingeExperience extends Component {
