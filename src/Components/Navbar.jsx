@@ -103,12 +103,12 @@ class NavBar extends Component {
                   </div>
                 </Link>
                 <div href="#" className="nav-link pb-0 mb-0">
-                <div className="d-flex m-0 p-0">  <img src={logo} className="profile-img mr-2" />
+                <div className="d-flex m-0 p-0">  <img src={logo} className="profile-img mr-1" />
                     <p>
                       Me
                     </p></div>
                   </div>
-                <Dropdown className="d-flex">
+                <Dropdown className="d-flex mr-2">
                   <Dropdown.Toggle
                     cssClass="e-caret-hide"
                     menuAlign="right"
@@ -168,7 +168,8 @@ class NavBar extends Component {
                 </Dropdown>
               </Nav>
               <Nav className="second-nav">
-                <Nav.Link href="#" className="nav-link">
+                <Link to="/">
+                <div href="#" className="nav-link">
                   <CgMenuGridR />
                   <p>
                     Work{" "}
@@ -177,7 +178,8 @@ class NavBar extends Component {
                       style={{ fontSize: "17px" }}
                     />
                   </p>
-                </Nav.Link>
+                </div>
+                </Link>
                 <Nav.Link
                   href="#"
                   className="nav-link"

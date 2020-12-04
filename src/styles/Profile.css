@@ -104,3 +104,14 @@
 .not-display-button{
 opacity: 0;
 }
+
+.add-feed-icon{
+    width:60px;
+    height:60px;
+}
+.button-add-feed{
+    border-radius: 20px;
+    border-color: #0069D9;
+    background-color: transparent;
+    color: #0069D9;
+}
