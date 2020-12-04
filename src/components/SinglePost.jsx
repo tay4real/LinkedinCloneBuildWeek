@@ -13,6 +13,7 @@ import {BsBookmarkFill, BsFillEyeFill} from 'react-icons/bs';
 import NewPostModal from './NewPostModal';
 export default class SinglePost extends Component {
     state = {
+        user:[],
         open: true,
         show: false,
         id: "",
@@ -30,7 +31,20 @@ export default class SinglePost extends Component {
             this.setState({ post: { text: id } })
         }
     }
+    getUserProfile=async()=>{
+        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
+            "method": "GET", 
+            "headers": new Headers({
+                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
+            })
+        })
+        let user = await response.json();
+        this.setState({user});
+    }
 
+    componentDidMount(){
+        this.getUserProfile();
+    }
     handleDelete = async (id) => {
         let response = await fetch("https://striveschool-api.herokuapp.com/api/posts/" + id, {
             method: "DELETE",
@@ -129,16 +143,29 @@ export default class SinglePost extends Component {
                     </Card.Footer>
                     <Modal show={this.state.show} onHide={this.handleClose} animation={false}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
+                            <Modal.Title>Update your post!
+                            </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
+                        <Row>
+                            <Col md={6} className="d-flex">
+                                <img className="profile-picture-modal" src={this.state.user.image && this.state.user.image} />
+                                <div className="d-block"><p className="ml-3 text-black m-0 p-0">{this.state.user.name && this.state.user.name} {this.state.user.surname && this.state.user.surname}</p>
+                                    <Form.Control as="select" custom className="postSelect ml-2 py-0">
+                                        <option>🌏Everyone</option>
+                                        <option>Your network</option>
+                                        <option>only me</option>
+                                    </Form.Control>
+                                </div>
+                            </Col>
+                        </Row>
                             <Form>
                                 <Form.Group>
                                     <Form.Control
                                         as="textarea"
                                         rows={3}
                                         placeholder="what do you want to talk about?"
-                                        style={{ border: "none" }}
+                                        style={{ border: "none", boxShadow:"none" }}
                                         value={this.state.post.text}
                                         id="text"
                                         onChange={(e) => this.updatePostField(e)}

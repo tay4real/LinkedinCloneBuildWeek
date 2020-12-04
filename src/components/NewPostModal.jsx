@@ -13,8 +13,23 @@ export default class NewPostModal extends Component {
         showpost: false,
         errMessage: "",
         post: null,
+        user:[],
     };
 
+    getUserProfile=async()=>{
+        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
+            "method": "GET", 
+            "headers": new Headers({
+                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
+            })
+        })
+        let user = await response.json();
+        this.setState({user});
+    }
+
+    componentDidMount(){
+        this.getUserProfile()
+    }
     updatePostField = (e) => {
         this.setState({  wholePost: { text: e.target.value } });
     };
@@ -89,8 +104,8 @@ export default class NewPostModal extends Component {
                     <Modal.Body>
                         <Row>
                             <Col md={6} className="d-flex">
-                                <img className="profile-picture-modal" src="https://media-exp1.licdn.com/dms/image/C4D03AQFQbLFj5Hs2kw/profile-displayphoto-shrink_400_400/0?e=1612396800&v=beta&t=ZqwAjRdb3l6vw76BXdUMU2UT5D-bPni7LqbahbQVVc0" />
-                                <div className="d-block"><p className="ml-3 text-black m-0 p-0">Simona Cossai</p>
+                                <img className="profile-picture-modal" src={this.state.user.image && this.state.user.image} />
+                                <div className="d-block"><p className="ml-3 text-black m-0 p-0">{this.state.user.name && this.state.user.name} {this.state.user.surname && this.state.user.surname}</p>
                                     <Form.Control as="select" custom className="postSelect ml-2 py-0">
                                         <option>🌏Everyone</option>
                                         <option>Your network</option>
@@ -105,7 +120,7 @@ export default class NewPostModal extends Component {
                                     as="textarea"
                                     rows={3}
                                     placeholder="what do you want to talk about?"
-                                    style={{ border: "none" }}
+                                    style={{ border: "none", boxShadow:"none" }}
                                     value={this.state.wholePost.text}
                                     id="text"
                                     onChange={(e) => this.updatePostField(e)}
