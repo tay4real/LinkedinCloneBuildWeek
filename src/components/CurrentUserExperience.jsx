@@ -35,6 +35,7 @@ class Experience extends Component {
 
   componentDidMount() {
     this.getExperience();
+    console.log("SONO NEL COMPONENT DID MOUNT HEYY")
   }
 
 

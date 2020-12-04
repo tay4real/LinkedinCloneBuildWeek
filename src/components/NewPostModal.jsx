@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap'
 import '../styles/CreatePostComponent.css';
 import { BiWorld } from 'react-icons/bi';
-import {FcAddImage} from 'react-icons/fc';
+import {FcAddImage}  from'react-icons/fc';
 
 export default class NewPostModal extends Component {
 

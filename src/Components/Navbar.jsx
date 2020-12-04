@@ -19,6 +19,7 @@ import { CgMenuGridR } from "react-icons/cg";
 import "../styles/Navbar.css";
 import { Link, withRouter } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { Divider } from "@material-ui/core";
 
 class NavBar extends Component {
   state = {
@@ -73,58 +74,65 @@ class NavBar extends Component {
                 </InputGroup>
               </Form>
 
-              <Nav className="ml-auto">
-                <Link to="/">
-                  <div className="nav-link">
-                    <AiFillHome className="icon m-0 p-0" />
-                    <p>Home</p>
+              <Nav className="ml-auto d-flex align-items-center">
+                <Link to="/" >
+                  <div className="nav-link pb-0 mb-0"><AiFillHome /><p>Home</p></div>
+                </Link>
+                <Link to="/" >
+                  <div href="#" className="nav-link pb-0 mb-0">
+                    <FaUserFriends />
+                    <p>My Network</p>
                   </div>
                 </Link>
-                <Nav.Link to="#" className="nav-link">
-                  <FaUserFriends />
-                  <p>My Network</p>
-                </Nav.Link>
-                <Nav.Link to="#" className="nav-link">
-                  <BsFillBriefcaseFill />
-                  <p>Jobs</p>
-                </Nav.Link>
-                <Nav.Link to="#" className="nav-link">
-                  <RiMessage2Fill />
-                  <p>Messaging</p>
-                </Nav.Link>
-                <Nav.Link to="#" className="nav-link">
-                  <RiNotification3Fill />
-                  <p>Notifications</p>
-                </Nav.Link>
-                <Dropdown>
+                <Link to="/" >
+                  <div href="#" className="nav-link pb-0 mb-0">
+                    <BsFillBriefcaseFill />
+                    <p>Jobs</p>
+                  </div>
+                </Link>
+                <Link to="/">
+                  <div href="#" className="nav-link pb-0 mb-0">
+                    <RiMessage2Fill />
+                    <p>Messaging</p>
+                  </div>
+                </Link>
+                <Link to="/">
+                  <div href="#" className="nav-link pb-0 mb-0">
+                    <RiNotification3Fill />
+                    <p>Notifications</p>
+                  </div>
+                </Link>
+                <div href="#" className="nav-link pb-0 mb-0">
+                <div className="d-flex m-0 p-0">  <img src={logo} className="profile-img mr-1" />
+                    <p>
+                      Me
+                    </p></div>
+                  </div>
+                <Dropdown className="d-flex mr-2">
                   <Dropdown.Toggle
                     cssClass="e-caret-hide"
                     menuAlign="right"
                     variant="transparent"
-                    to="#"
-                    className="nav-link"
+                    href="#"
+                    className="nav-link d-flex m-0 p-0"
+                    style={{height:"10px", fontSize: "17px",marginTop:"10px", boxShadow: "none"}}
                   >
-                    <img src={logo} className="profile-img" />
-                    <p>
-                      Me {" "}
-                    </p>
+                  
                   </Dropdown.Toggle>
-                  <Dropdown.Menu >
-                    <Dropdown.Item >
-                      <Link to="/profile">
-                          <img
-                          width={10}
-                          height={10}
-                          className="align-self-left mr-2"
-                          id="profile-image"
-                          style={{ borderRadius: "50%" }}
-                          src={this.state.user.image}
-                          alt="Generic placeholder"
-                        />
-                        <b>
-                          {this.state.user.name} {this.state.user.surname}
-                        </b>
-                      </Link>
+                  <Dropdown.Menu className="px-2">
+                    <Dropdown.Item href="/profile">
+                      <img
+                        width={10}
+                        height={10}
+                        className="align-self-left mr-2"
+                        id="profile-image"
+                        style={{ borderRadius: "50%" }}
+                        src={this.state.user.image}
+                        alt="Generic placeholder"
+                      />
+                      <b>
+                        {this.state.user.name} {this.state.user.surname}
+                      </b>
                     </Dropdown.Item>
                     
                      
@@ -159,26 +167,18 @@ class NavBar extends Component {
                 </Dropdown>
               </Nav>
               <Nav className="second-nav">
-                
-                 
-                <Nav.Link to="#" className="nav-link">
-                  <Dropdown>
-                      <Dropdown.Toggle
-                        cssClass="e-caret-hide"
-                        menuAlign="right"
-                        variant="transparent"
-                        to="#"
-                        className="nav-link"
-                      >
-                          <CgMenuGridR />
-                          <p>
-                            Work{" "}
-                          
-                          </p>
-                      </Dropdown.Toggle>
-                    </Dropdown>
-                </Nav.Link>
-
+                <Link to="/">
+                <div href="#" className="nav-link">
+                  <CgMenuGridR />
+                  <p>
+                    Work{" "}
+                    <RiArrowDownSFill
+                      className="m-0 p-0"
+                      style={{ fontSize: "17px" }}
+                    />
+                  </p>
+                </div>
+                </Link>
                 <Nav.Link
                   to="#"
                   className="nav-link"

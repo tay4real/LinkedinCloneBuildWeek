@@ -69,7 +69,7 @@ class Experience extends Component {
                 </Card.Title>
               </Col>
               <Link to="/profile/edit/position/new"><Col className="d-flex justify-content-end">
-                <FaPlus onClick={this.handleAddOpen} />
+               {this.state.experience.username===process.env.REACT_APP_USER_NAME && <FaPlus onClick={this.handleAddOpen} />} 
               </Col></Link>
             </Row>
   
