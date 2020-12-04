@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import { Row, Col, Image} from 'react-bootstrap'
-import Description from './Description'
-import ImageContainer from './ImageContainer'
-import Title from './Title'
-import {CgUserAdd} from 'react-icons/cg'
-
-
+import React, { Component } from "react";
+import { Row, Col, Image } from "react-bootstrap";
+import Description from "./Description";
+import ImageContainer from "./ImageContainer";
+import Title from "./Title";
+import { CgUserAdd } from "react-icons/cg";
 
 export default class SideCard extends Component {
+  state = {};
 
     render() {
         return (
