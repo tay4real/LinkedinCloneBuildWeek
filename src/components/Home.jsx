@@ -7,6 +7,7 @@ import ProfileDetailsCard from './ProfileDetailsCard';
 import ModifyProfileCard from './ModifyProfileCard';
 import MostUsedHashtag from './MostUsedHashtag';
 import AddFeedComponent from './AddFeedComponent';
+
 export default class Home extends Component {
     state={
         posts:[],
