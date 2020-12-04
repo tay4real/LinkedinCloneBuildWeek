@@ -86,14 +86,14 @@
     position: absolute;
     bottom:-13px;
     left: 120px;
-    z-index: 3000;
+    z-index: 100;
     font-size: 30px;
 }
 #file-pic{
     position: absolute;
     bottom:-13px;
     left: 120px;
-    z-index: 35000;
+    z-index: 10000;
     opacity: 0;
 }
 .display-button{
