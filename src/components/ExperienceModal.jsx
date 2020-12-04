@@ -12,8 +12,8 @@ export default class Experience_Modal extends Component {
             endDate: "", //could be null
             description: "",
             area: "",
-            image: ""
         },
+        image: "",
         experience_id : "",
         delete: false,
         update: false,
@@ -24,11 +24,15 @@ export default class Experience_Modal extends Component {
     }
 
 
-   
+    HandleFile = (e) => {
+        const formData = new FormData();
+        formData.append("experience", e.target.files[0]);
+        this.setState({ image: formData }, ()=>console.log(this.state.image))
+    };
    
     
     url = `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences`
-
+    
     updateField = (e) => {
         let experience = { ...this.state.experience } 
         let currentId = e.currentTarget.id 
@@ -36,6 +40,29 @@ export default class Experience_Modal extends Component {
         this.setState({experience})
     }
 
+    PostImage = async (id) => {   
+        try {
+            let response = await fetch(
+                `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/experiences/${id}/picture`,
+                {
+                    method: "POST",
+                    body: this.state.image,
+                    headers: {
+                        "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+                    },
+                }
+            );
+            if (response.ok) {
+                console.log("OK");
+                this.getUserExperience()
+            } else {
+                const error = await response.json();
+                console.log(error);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     handleSubmit=async(e)=>{
         e.preventDefault();
         try{
@@ -48,6 +75,9 @@ export default class Experience_Modal extends Component {
             body: JSON.stringify(this.state.experience),
             })
             if(response.ok){
+                let data= await response.json();
+                this.PostImage(data._id);
+                this.props.onHide()
                 alert("Experience Added");
             }else{
                 alert("Something went wrong!");
@@ -70,6 +100,10 @@ export default class Experience_Modal extends Component {
             body: JSON.stringify(this.state.experience),
             })
             if(response.ok){
+                let data= await response.json();
+                this.PostImage(data._id);
+                this.getUserExperience()
+                this.props.onHide()
                 alert("Experience Updated");
             }else{
                 alert("Something went wrong!");
@@ -93,6 +127,7 @@ export default class Experience_Modal extends Component {
             });
             if(response.ok){
                 alert("Experience Deleted");
+                this.props.onHide()
             }
             else{
                 alert("Something went wrong!")
@@ -134,37 +169,7 @@ export default class Experience_Modal extends Component {
         }     
     }
 
-    handleImageUpload = async(e) => {
-        const files = Array.from(e.target.file)
-        this.setState({uploading: true})
-
-        const formData = new FormData()
-
-        files.forEach((file,i) => {
-            formData.append(i, file)
-        })
-
-        try{
-            let response = await fetch(this.url,{
-                method: "POST",
-                headers: new Headers({
-                    "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
-                    "Content-Type": "application/json",
-                }),
-                body: JSON.stringify(formData),
-                })
-                if(response.ok){
-                    let images= await response.json();
-                    this.setState({uploading:false,images
-                    })
-                }else{
-                    alert("Something went wrong!");
-                }
-            }catch(error){
-                alert(`Something went wrong! ${error}`)
-            }
-       
-    }
+   
 
     removeImage = id => {
         this .setState({
@@ -276,8 +281,13 @@ export default class Experience_Modal extends Component {
 Add or link to external documents, photos, sites, videos, and presentations.</Form.Label>
                                        <Form.Row>
                                            <Form.Group as={Col}>
-                                                <Form.File.Input className="btn"  variant="primary" block className="rounded-pill" 
-                                      />
+                                           <input
+                      type="file"
+                      id="file-experience"
+                      onChange={this.HandleFile}
+                      accept="image/*"
+                    />
+                                    
                                            </Form.Group>
                                            <Form.Group as={Col}>
                                                 <Button variant="outline-primary"   className="rounded-pill" block onClick={this.state.toggle} >
@@ -293,6 +303,7 @@ Add or link to external documents, photos, sites, videos, and presentations.</Fo
                                                     placeholder="Paste or type a link to add a file or video"
                                                     aria-label="imgLink"
                                                     aria-describedby="imgLink"
+                                                    
                                                     />
                                                     <InputGroup.Append>
                                                     <Button variant="outline-secondary">Add</Button>
