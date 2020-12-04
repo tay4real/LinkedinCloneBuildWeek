@@ -55,6 +55,8 @@ export default class ProfileComponent extends Component {
   componentDidMount() {
     console.log(this.props.match.params.userId);
     this.getUserProfile();
+    this.getUsersProfile();
+
   }
 
   componentDidUpdate(prevProps) {
