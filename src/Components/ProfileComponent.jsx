@@ -13,55 +13,60 @@ import Footer from './Footer';
 
 
 export default class ProfileComponent extends Component {
-    state={
-        userProfile: {},
-        allUsersProfile: [],
-    }
+  state = {
+    userProfile: {},
+    allUsersProfile: [],
+  };
 
-    getUserProfile=async()=>{
-        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
-            "method": "GET", 
-            "headers": new Headers({
-                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
-            })
-        })
-        let userProfile = await response.json();
-        console.log(userProfile)
-        this.setState({userProfile});
-    }
+  getUserProfile = async () => {
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/me",
+      {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+        }),
+      }
+    );
+    let userProfile = await response.json();
+    console.log(userProfile);
+    this.setState({ userProfile });
+  };
 
-    getUsersProfile=async()=>{
-        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/",{
-            "method": "GET", 
-            "headers": new Headers({
-                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
-            })
-        })
-        if(response.ok){
-            let allUsersProfile = await response.json();
-            console.log(allUsersProfile)
-            this.setState({allUsersProfile});
-        }else{
-            <Alert >Opps, an error occured: </Alert>
-        }
-        
+  getUsersProfile = async () => {
+    let response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/profile/",
+      {
+        method: "GET",
+        headers: new Headers({
+          Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+        }),
+      }
+    );
+    if (response.ok) {
+      let allUsersProfile = await response.json();
+      console.log(allUsersProfile);
+      this.setState({ allUsersProfile });
+    } else {
+      <Alert>Opps, an error occured: </Alert>;
     }
+  };
 
-    componentDidMount(){
-        this.getUserProfile();
-        this.getUsersProfile() 
-    }
+  componentDidMount() {
+    this.getUserProfile();
+    this.getUsersProfile();
+  }
 
-    componentDidUpdate(){
-        if (this.state.showMore) {
-            console.log('just entered componentDidUpdate')
-            this.showUsers()
-            this.setState({showMore: false})    
-        }
+  componentDidUpdate() {
+    if (this.state.showMore) {
+      console.log("just entered componentDidUpdate");
+      this.showUsers();
+      this.setState({ showMore: false });
     }
+  }
 
     render() {
-        console.log(this.state.userProfile)
+     
         return (
             <>
                 <Container>
@@ -69,7 +74,7 @@ export default class ProfileComponent extends Component {
                         <Col md={8}>
                             {this.state.userProfile.length !== 0 ? <ProfileContainer userProfile={this.state.userProfile} /> :  <Loader />}
                             <Dashboard />
-                            <Experience />
+                            <Experience experience_id = {this.props.match.params.id}/>
                             <Interests/>
                         </Col>
                         <Col md={4} style={{flexDirection:"column", display:"flex", justifyContent:"start", alignItems:"center", textAlign:"center"}}>
