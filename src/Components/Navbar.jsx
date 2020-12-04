@@ -130,8 +130,7 @@ class NavBar extends Component {
                     <Dropdown.Item>
                       <Link to = "/profile">
                         <img
-                          width={10}
-                          height={10}
+                          style={{ borderRadius: "50%", width:"50px", height:"50px" }}
                           className="align-self-left mr-2"
                           id="profile-image"
                           style={{ borderRadius: "50%" }}
