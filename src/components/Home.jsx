@@ -4,7 +4,7 @@ import CreatePostComponent from './CreatePostComponent';
 import SinglePost from './SinglePost';
 import AnnounceCard from './AnnounceCard';
 import ProfileDetailsCard from './ProfileDetailsCard';
-
+import MostUsedHashtag from './MostUsedHashtag';
 export default class Home extends Component {
     state={
         posts:[],
@@ -33,6 +33,7 @@ export default class Home extends Component {
                  <Row className="mx-auto mt-5 justify-content-center text-center ">
             <Col md={3} >
                 <ProfileDetailsCard/>
+                <MostUsedHashtag/>
             </Col>
             <Col md={6} >
             <CreatePostComponent fetch={this.getPost} />

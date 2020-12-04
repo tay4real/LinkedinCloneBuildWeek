@@ -28,7 +28,7 @@ export default class ProfileDetailsCard extends Component {
                 <Card className="profile-detail-card">
                 <Card.Img variant="top" src="https://media-exp1.licdn.com/dms/image/C4E16AQFGvXwGqrpN7w/profile-displaybackgroundimage-shrink_350_1400/0/1602886552408?e=1612396800&v=beta&t=OgyPkQ41f4wnIJJ0SWmEY4caxBbVbzSd_o0i7MplkFk" className="profile-detail-image"/>
                 <img src={this.state.user.image} className="profile-detail-profile-pic mx-auto d-flex" />
-                <Card.Body>
+                <Card.Body className="pb-2">
                     <Card.Title>{this.state.user.username ?? "Username"}</Card.Title>
                     <Card.Subtitle className=" text-muted">{this.state.user.title ?? "Web Developer"}</Card.Subtitle>
                     <hr></hr>
