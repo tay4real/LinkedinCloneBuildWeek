@@ -129,7 +129,8 @@ export default class SinglePost extends Component {
                     </Card.Footer>
                     <Modal show={this.state.show} onHide={this.handleClose} animation={false}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
+                            <Modal.Title>Update your post!
+                            </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Form>
