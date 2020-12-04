@@ -16,6 +16,7 @@ export default class CreatePostComponent extends Component {
 
       handleClose = () => {
         this.setState({show:false});
+        this.props.fetch();
       }
      handleShow = () =>{
          this.setState({show: true});
@@ -56,7 +57,7 @@ export default class CreatePostComponent extends Component {
                     </Col>
                     </Row>
                 </Card>
-                <NewPostModal show={this.state.show} onHide={this.handleClose} />
+                <NewPostModal show={this.state.show} fetch={this.props.fetch} onHide={this.handleClose} />
                
             </div>
         )

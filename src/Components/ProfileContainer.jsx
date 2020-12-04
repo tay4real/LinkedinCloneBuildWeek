@@ -4,10 +4,61 @@ import '../styles/Profile.css';
 import { RiArrowDownSFill } from 'react-icons/ri';
 import { FaPencilAlt } from 'react-icons/fa';
 import {AiFillEye} from 'react-icons/ai';
+import {FcAddImage} from 'react-icons/fc';
 require('dotenv').config();
 
 export default class ProfileContainer extends Component {
 
+    state={
+        user: [],
+        profile:[], 
+        display:false,
+    }
+    getUserProfile=async()=>{
+        let response = await fetch("https://striveschool-api.herokuapp.com/api/profile/me",{
+            "method": "GET", 
+            "headers": new Headers({
+                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`
+            })
+        })
+        let user = await response.json();
+        this.setState({user});
+    }
+
+
+    componentDidMount(){
+        this.getUserProfile();
+    }
+
+    HandleFile = (e) => {
+        const formData = new FormData();
+        formData.append("profile", e.target.files[0]);
+        this.setState({ profile: formData });
+        this.setState({display: true})
+    };
+    PostImage = async () => {
+        try {
+            let response = await fetch(
+                `https://striveschool-api.herokuapp.com/api/profile/${process.env.REACT_APP_USER_ID}/picture`,
+                {
+                    method: "POST",
+                    body: this.state.profile,
+                    headers: {
+                        "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN}`,
+                    },
+                }
+            );
+            if (response.ok) {
+                this.getUserProfile()
+                this.setState({display:false})
+            } else {
+                const error = await response.json();
+                console.log(error);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     render() {
         return (
           <Card className="card-user-profile">
@@ -15,8 +66,18 @@ export default class ProfileContainer extends Component {
                     src="https://media-exp1.licdn.com/dms/image/C4E16AQFGvXwGqrpN7w/profile-displaybackgroundimage-shrink_350_1400/0/1602886552408?e=1612396800&v=beta&t=OgyPkQ41f4wnIJJ0SWmEY4caxBbVbzSd_o0i7MplkFk"
                     className="coverImage image-fluid" />
                 <Card.Body>
-                    <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFQbLFj5Hs2kw/profile-displayphoto-shrink_400_400/0?e=1612396800&v=beta&t=ZqwAjRdb3l6vw76BXdUMU2UT5D-bPni7LqbahbQVVc0" className="profile-image" />
+                <div id="file-label">
+                        <input
+                      type="file"
+                      id="file-pic"
+                      onChange={this.HandleFile}
+                      accept="image/*"
+                    />
+                    <FcAddImage className="upload-profile-pic" />
+                    </div>
+                    <img src={this.state.user.image ?? "https://media-exp1.licdn.com/dms/image/C4D03AQFQbLFj5Hs2kw/profile-displayphoto-shrink_400_400/0?e=1612396800&v=beta&t=ZqwAjRdb3l6vw76BXdUMU2UT5D-bPni7LqbahbQVVc0"} className="profile-image" />
                     <div className="buttons">
+                    <Button onClick={this.PostImage} className={this.state.display===true ? "display-button mr-2" : "not-display-button"}>Upload</Button>
                         <Button className="add-profile-button mr-2">Add profile section <RiArrowDownSFill className="m-0 p-0" style={{ fontSize: "17px" }} /></Button>
                         <Button className="more-button mr-1 py-0">More...</Button>
                         <Button className="pencil-edit-button"><FaPencilAlt /></Button>
