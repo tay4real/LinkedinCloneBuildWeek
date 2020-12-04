@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import '../styles/SinglePost.css';
 import {BiDotsHorizontalRounded} from 'react-icons/bi';
 import {AiOutlineLike} from 'react-icons/ai';
@@ -7,11 +6,6 @@ import {RiMessageLine} from 'react-icons/ri';
 import {IoMdShareAlt} from 'react-icons/io';
 import {RiSendPlaneFill} from 'react-icons/ri';
 import { Card, Container, Row, Col, Button, Spinner, Modal, Form, DropdownButton, Dropdown } from 'react-bootstrap';
-import { BiDotsHorizontalRounded } from 'react-icons/bi';
-import { AiOutlineLike } from 'react-icons/ai';
-import { RiMessageLine } from 'react-icons/ri';
-import { IoMdShareAlt } from 'react-icons/io';
-import { RiSendPlaneFill } from 'react-icons/ri';
 import { BsPencilSquare } from 'react-icons/bs';
 import {BsTrashFill} from 'react-icons/bs';
 import {BsBookmarkFill, BsFillEyeFill} from 'react-icons/bs';

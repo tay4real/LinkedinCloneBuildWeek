@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Card } from 'react-bootstrap';
 import '../styles/ProfileDetailsCard.css';
 import { Card, Button, Row, Col, Container } from 'react-bootstrap';
 import {BsBookmarkFill} from 'react-icons/bs';
