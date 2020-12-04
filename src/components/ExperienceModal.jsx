@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Modal, Button, Form, Col,  InputGroup, FormControl, Alert } from 'react-bootstrap';
 require('dotenv').config()
 
-export default class Experience_Modal extends Component {
+export default class ExperienceModal extends Component {
     state = {
         experience: {
             role: "",
