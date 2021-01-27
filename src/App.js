@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./components/node_modules/bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import "./App.css";
 import Footer from "./components/Footer";
